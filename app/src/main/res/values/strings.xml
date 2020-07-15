@@ -3,4 +3,5 @@
     <string name="title_home">Home</string>
     <string name="title_saved_routes">Saved routes</string>
     <string name="title_user">User</string>
+    <string name="find">Find</string>
 </resources>

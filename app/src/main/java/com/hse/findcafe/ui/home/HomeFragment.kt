@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.hse.findcafe.FindDialog
 import com.hse.findcafe.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -33,6 +37,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             //textView.text = it
 
         })
+
         return root
     }
 
@@ -42,6 +47,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         map.onCreate(null)
         map.onResume()
         map.getMapAsync(this)
+
+        find_view.setOnClickListener {
+            FindDialog.newInstance().show(requireActivity().supportFragmentManager, FindDialog.TAG)
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

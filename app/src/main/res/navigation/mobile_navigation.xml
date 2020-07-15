@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_saved_routes" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_user"
         android:name="com.hse.findcafe.ui.user.UserFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_user" />

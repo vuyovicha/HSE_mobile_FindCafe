@@ -12,7 +12,7 @@
         android:title="@string/title_saved_routes" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_user"
         android:icon="@drawable/ic_person_black_24dp"
         android:title="@string/title_user" />
 
