@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.hse.findcafe.R
 
 class SavedRoutesFragment : Fragment() {
@@ -20,7 +20,7 @@ class SavedRoutesFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         savedRoutesViewModel =
-                ViewModelProviders.of(this).get(SavedRoutesViewModel::class.java)
+                ViewModelProvider(this).get(SavedRoutesViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_saved_routes, container, false)
         val textView: TextView = root.findViewById(R.id.text_saved_routes)
         savedRoutesViewModel.text.observe(viewLifecycleOwner, Observer {
