@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FindCafe</string>
+    <string name="title_home">Главная</string>
+    <string name="title_saved_routes">Маршруты</string>
+    <string name="title_user">Профиль</string>
+</resources>
