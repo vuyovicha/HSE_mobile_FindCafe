@@ -1,6 +1,8 @@
 package com.hse.findcafe.ui.home
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,11 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken
+import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.maps.DirectionsApi
 import com.google.maps.GeoApiContext
@@ -24,6 +31,50 @@ import com.google.maps.model.TravelMode
 import com.hse.findcafe.FindDialog
 import com.hse.findcafe.R
 import kotlinx.android.synthetic.main.fragment_home.*
+
+
+fun getAutoPredictions(req : String, ctx : Context): String? {
+    // Get restourants here
+    if (!Places.isInitialized()) {
+        //val gApiKey: String = applicationContext.getString(R.string.api_key)
+        val gApiKey = "API HERE"
+        Places.initialize(ctx, gApiKey)
+    }
+    val placesClient = Places.createClient(ctx)
+
+    val token = AutocompleteSessionToken.newInstance()
+    val request =
+        FindAutocompletePredictionsRequest.builder()
+            .setTypeFilter(TypeFilter.REGIONS)
+            .setSessionToken(token)
+            .setQuery("Самара")
+            .build()
+
+    var ans: String? = null
+    placesClient.findAutocompletePredictions(request)
+        .addOnSuccessListener { response: FindAutocompletePredictionsResponse ->
+            val sb = StringBuilder()
+            for (prediction in response.autocompletePredictions) {
+                sb.append(prediction.getPrimaryText(null).toString())
+                sb.append("\n")
+            }
+            //Toast.makeText(applicationContext, sb.toString(), Toast.LENGTH_LONG).show()
+            ans = sb.toString()
+        }
+        .addOnFailureListener { exception: Exception ->
+            exception.printStackTrace(); Toast.makeText(
+            ctx,
+            exception.message,
+            Toast.LENGTH_LONG
+        ).show()
+            exception.message?.let { Log.e("mytag", it) }
+            for (i in exception.stackTrace) {
+                Log.e("mytag", i.toString())
+            }
+        }
+    return ans
+}
+
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
 
