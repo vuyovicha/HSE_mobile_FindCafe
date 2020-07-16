@@ -11,9 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.LatLng
+//import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.maps.DirectionsApi
+import com.google.maps.GeoApiContext
+import com.google.maps.model.DirectionsResult
+import com.google.maps.model.LatLng
+import com.google.maps.model.TravelMode
 import com.hse.findcafe.FindDialog
 import com.hse.findcafe.R
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -21,8 +28,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var homeViewModel: HomeViewModel
-
-private val places: MutableList<LatLng> =
+private val places: MutableList<com.google.maps.model.LatLng> =
         ArrayList()
 private var mapsApiKey: String? = null
     private var width = 0
@@ -54,9 +60,10 @@ private var mapsApiKey: String? = null
         mapsApiKey = "9a35fdaa8bmsh64d201965518884p14fa46jsne83376c9e265"
         width = resources.displayMetrics.widthPixels
 
-        val mapFragment = supportFragmentManager
+        val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
 
         find_view.setOnClickListener {
             FindDialog.newInstance().show(requireActivity().supportFragmentManager, FindDialog.TAG)
@@ -90,7 +97,7 @@ private var mapsApiKey: String? = null
                 .waypoints(places[1], places[2]).await()
         } catch (e: Exception) {
             e.printStackTrace()
-            Toast.makeText(applicationContext, "Error!", Toast.LENGTH_LONG).show()
+            //Toast.makeText(applicationContext, "Error!", Toast.LENGTH_LONG).show()
             return
         }
         val path =
