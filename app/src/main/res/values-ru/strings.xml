@@ -5,4 +5,12 @@
     <string name="title_saved_routes">Маршруты</string>
     <string name="title_user">Профиль</string>
     <string name="find">Поиск</string>
+    <string name="cheap">дёшево</string>
+    <string name="average">средне</string>
+    <string name="all">все</string>
+    <string name="cost">Цена</string>
+    <string name="open">Открыто</string>
+    <string name="min_rate">Минимальный рейтинг</string>
+    <string name="from">Откуда</string>
+    <string name="to">Куда</string>
 </resources>

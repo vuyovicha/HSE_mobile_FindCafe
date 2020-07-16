@@ -4,10 +4,12 @@
     <string name="title_saved_routes">Saved routes</string>
     <string name="title_user">User</string>
     <string name="find">Find</string>
-    <string-array name="targets" >
-        <item>Ресторан</item>
-        <item>Фастфуд</item>
-        <item>Аптека</item>
-        <item>Продуктовый магазин</item>
-    </string-array>
+    <string name="cheap">cheap</string>
+    <string name="average">average</string>
+    <string name="all">all</string>
+    <string name="cost">Cost</string>
+    <string name="open">Open</string>
+    <string name="min_rate">Minimum rating</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
 </resources>

@@ -12,7 +12,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Откуда"
+        android:hint="@string/from"
         android:inputType="textPostalAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Куда"
+        android:hint="@string/to"
         android:inputType="textPostalAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,51 +84,51 @@
         app:layout_constraintTop_toBottomOf="@+id/route_to" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/TV_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Минимальный рейтинг"
+        android:text="@string/min_rate"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reviewRating" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/is_open"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checked="true"
-        android:text="Открыто"
+        android:text="@string/open"
         android:textSize="18sp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/TV_rating" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/TV_cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Цена"
+        android:text="@string/cost"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/is_open" />
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
 
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/TV_cost">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/RB_cost_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
@@ -136,27 +136,27 @@
             android:textAlignment="center"
             android:layout_weight="1"
             android:checked="true"
-            android:text="все" />
+            android:text="@string/all" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/RB_cost_average"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
             android:background="@drawable/custom_rb"
             android:textAlignment="center"
             android:layout_weight="1"
-            android:text="средне" />
+            android:text="@string/average" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/RB_cost_cheap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
             android:background="@drawable/custom_rb"
             android:textAlignment="center"
             android:layout_weight="1"
-            android:text="дёшево" />
+            android:text="@string/cheap" />
     </RadioGroup>
 
 

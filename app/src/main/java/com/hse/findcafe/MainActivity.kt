@@ -60,10 +60,4 @@ class MainActivity : AppCompatActivity() {
 */
 
     }
-
-    private fun BottomNavigationView.setOnNavigationItemSelectedListener(
-        onNavigationItemSelectedListener: BottomNavigationView.OnNavigationItemSelectedListener
-    ) {
-        TODO("Not yet implemented")
-    }
 }
