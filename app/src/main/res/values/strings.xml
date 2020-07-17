@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">New_bottom_navigation_ui</string>
+    <string name="title_home">Find</string>
+    <string name="title_dashboard">Map</string>
+    <string name="title_notifications">Result</string>
+    <string name="find">Find</string>
+    <string name="cheap">cheap</string>
+    <string name="average">average</string>
+    <string name="all">all</string>
+    <string name="cost">Cost</string>
+    <string name="open">Open</string>
+    <string name="min_rate">Minimum rating</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="find_cafe_text">Find cafe...</string>
+</resources>

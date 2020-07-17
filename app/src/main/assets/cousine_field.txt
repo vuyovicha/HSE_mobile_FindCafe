@@ -1,0 +1,842 @@
+[
+    {
+        "value": "all",
+        "label": "All Cuisines"
+    },
+    {
+        "value": "10788",
+        "label": "Afghani"
+    },
+    {
+        "value": "9908",
+        "label": "American"
+    },
+    {
+        "value": "21175",
+        "label": "Antipasti"
+    },
+    {
+        "value": "21027",
+        "label": "Apple pie"
+    },
+    {
+        "value": "11744",
+        "label": "Arabic"
+    },
+    {
+        "value": "10766",
+        "label": "Armenian"
+    },
+    {
+        "value": "10659",
+        "label": "Asian"
+    },
+    {
+        "value": "10681",
+        "label": "Australian"
+    },
+    {
+        "value": "10620",
+        "label": "Austrian"
+    },
+    {
+        "value": "10732",
+        "label": "Balti"
+    },
+    {
+        "value": "10767",
+        "label": "Bangladeshi"
+    },
+    {
+        "value": "10640",
+        "label": "Bar"
+    },
+    {
+        "value": "10651",
+        "label": "Barbecue"
+    },
+    {
+        "value": "20733",
+        "label": "Bass"
+    },
+    {
+        "value": "20752",
+        "label": "Beef"
+    },
+    {
+        "value": "10876",
+        "label": "Beef Bourguignon"
+    },
+    {
+        "value": "20498",
+        "label": "Beef Cheeks"
+    },
+    {
+        "value": "21355",
+        "label": "Beer restaurants"
+    },
+    {
+        "value": "10617",
+        "label": "Belgian"
+    },
+    {
+        "value": "11738",
+        "label": "Bento (Lunch Box)"
+    },
+    {
+        "value": "20325",
+        "label": "Bolognese"
+    },
+    {
+        "value": "10621",
+        "label": "Brew Pub"
+    },
+    {
+        "value": "10662",
+        "label": "British"
+    },
+    {
+        "value": "21215",
+        "label": "Bruschette"
+    },
+    {
+        "value": "10907",
+        "label": "Burger"
+    },
+    {
+        "value": "10878",
+        "label": "Burrito"
+    },
+    {
+        "value": "10642",
+        "label": "Cafe"
+    },
+    {
+        "value": "21275",
+        "label": "Cakes"
+    },
+    {
+        "value": "20027",
+        "label": "Calamari"
+    },
+    {
+        "value": "20064",
+        "label": "Campania"
+    },
+    {
+        "value": "10699",
+        "label": "Canadian"
+    },
+    {
+        "value": "10692",
+        "label": "Cantonese"
+    },
+    {
+        "value": "20320",
+        "label": "Carbonara"
+    },
+    {
+        "value": "10622",
+        "label": "Caribbean"
+    },
+    {
+        "value": "11741",
+        "label": "Caucasian"
+    },
+    {
+        "value": "20549",
+        "label": "Caviar"
+    },
+    {
+        "value": "10760",
+        "label": "Central American"
+    },
+    {
+        "value": "11739",
+        "label": "Central Asian"
+    },
+    {
+        "value": "10746",
+        "label": "Central European"
+    },
+    {
+        "value": "20075",
+        "label": "Central-Italian"
+    },
+    {
+        "value": "10884",
+        "label": "Cheeseburger"
+    },
+    {
+        "value": "10885",
+        "label": "Cheesecake"
+    },
+    {
+        "value": "21293",
+        "label": "Cheese fondue"
+    },
+    {
+        "value": "20339",
+        "label": "Chicken Parmesan"
+    },
+    {
+        "value": "10685",
+        "label": "Chicken Wings"
+    },
+    {
+        "value": "20029",
+        "label": "Chili"
+    },
+    {
+        "value": "5379",
+        "label": "Chinese"
+    },
+    {
+        "value": "21038",
+        "label": "Chocolate mousse"
+    },
+    {
+        "value": "20556",
+        "label": "Clams"
+    },
+    {
+        "value": "20163",
+        "label": "Club Sandwich"
+    },
+    {
+        "value": "20544",
+        "label": "Cod"
+    },
+    {
+        "value": "10669",
+        "label": "Contemporary"
+    },
+    {
+        "value": "10893",
+        "label": "Crab"
+    },
+    {
+        "value": "20317",
+        "label": "Crepes"
+    },
+    {
+        "value": "20465",
+        "label": "Croquettes"
+    },
+    {
+        "value": "20181",
+        "label": "Curry"
+    },
+    {
+        "value": "10764",
+        "label": "Danish"
+    },
+    {
+        "value": "10666",
+        "label": "Deli"
+    },
+    {
+        "value": "10896",
+        "label": "Dim Sum"
+    },
+    {
+        "value": "10676",
+        "label": "Diner"
+    },
+    {
+        "value": "21353",
+        "label": "Dining bars"
+    },
+    {
+        "value": "21022",
+        "label": "Duck"
+    },
+    {
+        "value": "10898",
+        "label": "Dumplings"
+    },
+    {
+        "value": "10627",
+        "label": "Dutch"
+    },
+    {
+        "value": "10742",
+        "label": "Eastern European"
+    },
+    {
+        "value": "19959",
+        "label": "Eggs Benedict"
+    },
+    {
+        "value": "20063",
+        "label": "Emilian"
+    },
+    {
+        "value": "20333",
+        "label": "Escargot"
+    },
+    {
+        "value": "10654",
+        "label": "European"
+    },
+    {
+        "value": "20034",
+        "label": "Fajitas"
+    },
+    {
+        "value": "10899",
+        "label": "Falafel"
+    },
+    {
+        "value": "10646",
+        "label": "Fast Food"
+    },
+    {
+        "value": "10900",
+        "label": "Filet Mignon"
+    },
+    {
+        "value": "10636",
+        "label": "Filipino"
+    },
+    {
+        "value": "21324",
+        "label": "Fish"
+    },
+    {
+        "value": "10901",
+        "label": "Fish & Chips"
+    },
+    {
+        "value": "20740",
+        "label": "Fish Soup"
+    },
+    {
+        "value": "20697",
+        "label": "Foie gras"
+    },
+    {
+        "value": "10774",
+        "label": "Fondue"
+    },
+    {
+        "value": "5086",
+        "label": "French"
+    },
+    {
+        "value": "20703",
+        "label": "French Fries"
+    },
+    {
+        "value": "10902",
+        "label": "French Toast"
+    },
+    {
+        "value": "21285",
+        "label": "Fried rice"
+    },
+    {
+        "value": "20349",
+        "label": "Frog Legs"
+    },
+    {
+        "value": "10671",
+        "label": "Fusion"
+    },
+    {
+        "value": "10683",
+        "label": "Gastropub"
+    },
+    {
+        "value": "20533",
+        "label": "Gelato"
+    },
+    {
+        "value": "11742",
+        "label": "Georgian"
+    },
+    {
+        "value": "10347",
+        "label": "German"
+    },
+    {
+        "value": "10664",
+        "label": "Greek"
+    },
+    {
+        "value": "20182",
+        "label": "Green Curry"
+    },
+    {
+        "value": "10668",
+        "label": "Grill"
+    },
+    {
+        "value": "21277",
+        "label": "Gyoza"
+    },
+    {
+        "value": "20754",
+        "label": "Hamburgers"
+    },
+    {
+        "value": "10772",
+        "label": "Hawaiian"
+    },
+    {
+        "value": "10679",
+        "label": "Healthy"
+    },
+    {
+        "value": "10909",
+        "label": "Hot Pot"
+    },
+    {
+        "value": "20532",
+        "label": "Hummus"
+    },
+    {
+        "value": "9899",
+        "label": "Ice Cream"
+    },
+    {
+        "value": "10346",
+        "label": "Indian"
+    },
+    {
+        "value": "10690",
+        "label": "Indonesian"
+    },
+    {
+        "value": "10648",
+        "label": "International"
+    },
+    {
+        "value": "10618",
+        "label": "Irish"
+    },
+    {
+        "value": "10769",
+        "label": "Israeli"
+    },
+    {
+        "value": "4617",
+        "label": "Italian"
+    },
+    {
+        "value": "5473",
+        "label": "Japanese"
+    },
+    {
+        "value": "21367",
+        "label": "Japanese Fusion"
+    },
+    {
+        "value": "9911",
+        "label": "Juice & Smoothies"
+    },
+    {
+        "value": "20185",
+        "label": "Kabobs"
+    },
+    {
+        "value": "10661",
+        "label": "Korean"
+    },
+    {
+        "value": "21174",
+        "label": "Lamb"
+    },
+    {
+        "value": "20039",
+        "label": "Lamb chops"
+    },
+    {
+        "value": "10914",
+        "label": "Lasagne"
+    },
+    {
+        "value": "10639",
+        "label": "Latin"
+    },
+    {
+        "value": "20068",
+        "label": "Lazio"
+    },
+    {
+        "value": "10626",
+        "label": "Lebanese"
+    },
+    {
+        "value": "10915",
+        "label": "Lobster"
+    },
+    {
+        "value": "10741",
+        "label": "Malaysian"
+    },
+    {
+        "value": "10917",
+        "label": "Mandarin Duck"
+    },
+    {
+        "value": "20318",
+        "label": "Meatballs"
+    },
+    {
+        "value": "21350",
+        "label": "Medicinal foods"
+    },
+    {
+        "value": "10649",
+        "label": "Mediterranean"
+    },
+    {
+        "value": "5110",
+        "label": "Mexican"
+    },
+    {
+        "value": "10687",
+        "label": "Middle Eastern"
+    },
+    {
+        "value": "10633",
+        "label": "Moroccan"
+    },
+    {
+        "value": "10919",
+        "label": "Moussaka"
+    },
+    {
+        "value": "20316",
+        "label": "Mussels"
+    },
+    {
+        "value": "20041",
+        "label": "Nachos"
+    },
+    {
+        "value": "20062",
+        "label": "Neapolitan"
+    },
+    {
+        "value": "10756",
+        "label": "Nepali"
+    },
+    {
+        "value": "10645",
+        "label": "Noodle"
+    },
+    {
+        "value": "20074",
+        "label": "Northern-Italian"
+    },
+    {
+        "value": "10782",
+        "label": "Norwegian"
+    },
+    {
+        "value": "10921",
+        "label": "Omelette"
+    },
+    {
+        "value": "10922",
+        "label": "Oyster"
+    },
+    {
+        "value": "10923",
+        "label": "Pad Thai"
+    },
+    {
+        "value": "10924",
+        "label": "Paella"
+    },
+    {
+        "value": "10748",
+        "label": "Pakistani"
+    },
+    {
+        "value": "16555",
+        "label": "Pancakes"
+    },
+    {
+        "value": "21209",
+        "label": "Paninis"
+    },
+    {
+        "value": "10678",
+        "label": "Pasta"
+    },
+    {
+        "value": "10925",
+        "label": "Peking Duck"
+    },
+    {
+        "value": "10765",
+        "label": "Persian"
+    },
+    {
+        "value": "21239",
+        "label": "Pesto"
+    },
+    {
+        "value": "10641",
+        "label": "Pizza"
+    },
+    {
+        "value": "21326",
+        "label": "Pork"
+    },
+    {
+        "value": "10680",
+        "label": "Portuguese"
+    },
+    {
+        "value": "20699",
+        "label": "Prawns"
+    },
+    {
+        "value": "20332",
+        "label": "Profiteroles"
+    },
+    {
+        "value": "10670",
+        "label": "Pub"
+    },
+    {
+        "value": "20561",
+        "label": "Quail"
+    },
+    {
+        "value": "20324",
+        "label": "Quiche"
+    },
+    {
+        "value": "11722",
+        "label": "Ramen"
+    },
+    {
+        "value": "20183",
+        "label": "Red Curry"
+    },
+    {
+        "value": "10932",
+        "label": "Ribs"
+    },
+    {
+        "value": "20312",
+        "label": "Risotto"
+    },
+    {
+        "value": "10933",
+        "label": "Roast Beef"
+    },
+    {
+        "value": "21071",
+        "label": "Roast Chicken"
+    },
+    {
+        "value": "20067",
+        "label": "Romana"
+    },
+    {
+        "value": "10693",
+        "label": "Russian"
+    },
+    {
+        "value": "16554",
+        "label": "Salad"
+    },
+    {
+        "value": "20547",
+        "label": "Salmon"
+    },
+    {
+        "value": "10647",
+        "label": "Sandwiches"
+    },
+    {
+        "value": "21320",
+        "label": "Sashimi"
+    },
+    {
+        "value": "20542",
+        "label": "Scallops"
+    },
+    {
+        "value": "10762",
+        "label": "Scandinavian"
+    },
+    {
+        "value": "10935",
+        "label": "Schnitzel"
+    },
+    {
+        "value": "10745",
+        "label": "Scottish"
+    },
+    {
+        "value": "10643",
+        "label": "Seafood"
+    },
+    {
+        "value": "10752",
+        "label": "Shanghai"
+    },
+    {
+        "value": "10937",
+        "label": "Shrimp"
+    },
+    {
+        "value": "20069",
+        "label": "Sicilian"
+    },
+    {
+        "value": "10714",
+        "label": "Singaporean"
+    },
+    {
+        "value": "20485",
+        "label": "Sirloin Steak"
+    },
+    {
+        "value": "10700",
+        "label": "Soups"
+    },
+    {
+        "value": "10749",
+        "label": "South American"
+    },
+    {
+        "value": "20076",
+        "label": "Southern-Italian"
+    },
+    {
+        "value": "10634",
+        "label": "Southwestern"
+    },
+    {
+        "value": "10938",
+        "label": "Souvlaki"
+    },
+    {
+        "value": "10655",
+        "label": "Spanish"
+    },
+    {
+        "value": "10345",
+        "label": "Steakhouse"
+    },
+    {
+        "value": "10686",
+        "label": "Street Food"
+    },
+    {
+        "value": "10940",
+        "label": "Surf And Turf"
+    },
+    {
+        "value": "10653",
+        "label": "Sushi"
+    },
+    {
+        "value": "10753",
+        "label": "Swedish"
+    },
+    {
+        "value": "10628",
+        "label": "Swiss"
+    },
+    {
+        "value": "10695",
+        "label": "Szechuan"
+    },
+    {
+        "value": "19954",
+        "label": "Tacos"
+    },
+    {
+        "value": "10696",
+        "label": "Taiwanese"
+    },
+    {
+        "value": "10941",
+        "label": "Tandoori Chicken"
+    },
+    {
+        "value": "10942",
+        "label": "Tapas"
+    },
+    {
+        "value": "10943",
+        "label": "T-Bone Steak"
+    },
+    {
+        "value": "11717",
+        "label": "Tempura"
+    },
+    {
+        "value": "10660",
+        "label": "Thai"
+    },
+    {
+        "value": "20188",
+        "label": "Tikka Masala"
+    },
+    {
+        "value": "20314",
+        "label": "Tiramisu"
+    },
+    {
+        "value": "20730",
+        "label": "Toasts"
+    },
+    {
+        "value": "10944",
+        "label": "Tortillas"
+    },
+    {
+        "value": "20552",
+        "label": "Tuna"
+    },
+    {
+        "value": "10663",
+        "label": "Turkish"
+    },
+    {
+        "value": "20066",
+        "label": "Tuscan"
+    },
+    {
+        "value": "10770",
+        "label": "Ukrainian"
+    },
+    {
+        "value": "11740",
+        "label": "Uzbek"
+    },
+    {
+        "value": "10675",
+        "label": "Vietnamese"
+    },
+    {
+        "value": "20045",
+        "label": "Waffles"
+    },
+    {
+        "value": "21219",
+        "label": "Wild boar"
+    },
+    {
+        "value": "10682",
+        "label": "Wine Bar"
+    },
+    {
+        "value": "19955",
+        "label": "Wings"
+    },
+    {
+        "value": "20184",
+        "label": "Yellow Curry"
+    }
+]

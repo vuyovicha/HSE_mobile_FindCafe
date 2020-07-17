@@ -1,0 +1,30 @@
+[
+{
+"label":"Restaurants",
+"value":"10591"
+},
+{
+"label":"Quick Bites",
+"value":"16556"
+},
+{
+"label":"Dessert",
+"value":"9909"
+},
+{
+"label":"Coffee & Tea",
+"value":"9900"
+},
+{
+"label":"Bakeries",
+"value":"9901"
+},
+{
+"label":"Bars & Pubs",
+"value":"11776"
+},
+{
+"label":"Specialty Food Market",
+"value":"16548"
+}
+]

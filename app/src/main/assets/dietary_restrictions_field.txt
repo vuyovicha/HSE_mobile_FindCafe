@@ -1,0 +1,22 @@
+[
+{
+"label":"None",
+"value":"all"
+},
+{
+"label":"Vegetarian Friendly",
+"value":"10665"
+},
+{
+"label":"Vegan Options",
+"value":"10697"
+},
+{
+"label":"Halal",
+"value":"10751"
+},
+{
+"label":"Gluten Free Options",
+"value":"10992"
+}
+]
