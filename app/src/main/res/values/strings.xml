@@ -4,13 +4,15 @@
     <string name="title_dashboard">Map</string>
     <string name="title_notifications">Result</string>
     <string name="find">Find</string>
-    <string name="cheap">cheap</string>
-    <string name="average">average</string>
-    <string name="all">all</string>
     <string name="cost">Cost</string>
-    <string name="open">Open</string>
+    <string name="open_now_text">Open now</string>
     <string name="min_rate">Minimum rating</string>
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="find_cafe_text">Find cafe...</string>
+    <string name="header_text">Route</string>
+    <string name="price_header_text">Minimum price</string>
+    <string name="rating_header_text">Minimum rating</string>
+    <string name="submit_button_text">Submit</string>
+    <string name="go_back_button_text">Go back</string>
 </resources>

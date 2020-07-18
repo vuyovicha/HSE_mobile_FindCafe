@@ -1,14 +1,14 @@
-package com.example.new_bottom_navigation_ui.ui.dashboard
+package com.example.new_bottom_navigation_ui
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
-import com.example.new_bottom_navigation_ui.MainActivity
 import com.example.new_bottom_navigation_ui.R
 import com.example.new_bottom_navigation_ui.ui.home.SharedViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -18,8 +18,13 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.map_fragment.*
+import kotlinx.android.synthetic.main.map_fragment.view.*
 
-class DashboardFragment : Fragment(), OnMapReadyCallback {
+class MapFragment : Fragment(), OnMapReadyCallback {
+
+    companion object {
+        const val TAG = "MapFragment"
+    }
 
     private val model: SharedViewModel by activityViewModels()
 
@@ -31,9 +36,30 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.map_fragment, container, false)
-        model.text.observe(viewLifecycleOwner, Observer {
-            //use it here
-        })
+//        model.text.observe(viewLifecycleOwner, Observer {
+////            //use it here
+////        })
+
+        val button = root.find_button as Button
+
+        button.setOnClickListener{
+            val supportFragmentManager = requireActivity().supportFragmentManager
+//            fm.beginTransaction().show(R.id.nav_host_fragment, FindFragment()).addToBackStack(null).commit()
+            val fragmentTag = FindFragment::class.java.simpleName
+
+            supportFragmentManager.commit {
+                supportFragmentManager.fragments.forEach { hide(it) }
+                val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
+                if (fragment != null) {
+                    show(fragment)
+                    println(fragmentTag)
+                } else {
+                    val nextFragment = FindFragment()
+                    add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)
+
+                }
+            }
+        }
 
 
         return root
@@ -43,9 +69,6 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        find_button.setOnClickListener{
-
-        }
 
         map.onCreate(null)
         map.onResume()
