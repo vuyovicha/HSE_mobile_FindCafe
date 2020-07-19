@@ -1,6 +1,7 @@
 package com.example.new_bottom_navigation_ui
 
 import android.os.Bundle
+import android.widget.SearchView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -8,16 +9,18 @@ import androidx.fragment.app.commit
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.set_preferences_fragment_search.*
 
 class RestaurantCriterions(val label : String, val value : String)
+
+class  RestaurantCriterionsIndexed (val label : String, val value : String, val index : Int)
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        var cousineOptions : ArrayList<RestaurantCriterions> = ArrayList()
-        var dietaryRestrictionsOptions : ArrayList<RestaurantCriterions> = ArrayList()
-        var establishmentTypeOptions : ArrayList<RestaurantCriterions> = ArrayList()
-        var pricesOptions : ArrayList<RestaurantCriterions> = ArrayList()
+        var cousineOptions : ArrayList<RestaurantCriterionsIndexed> = ArrayList()
+        var dietaryRestrictionsOptions : ArrayList<RestaurantCriterionsIndexed> = ArrayList()
+        var establishmentTypeOptions : ArrayList<RestaurantCriterionsIndexed> = ArrayList()
         var setPreferencesFragmentTag = "Cousin"
         var dietaryRestrictionsStates: BooleanArray = BooleanArray(0)
         var establishmentTypeStates: BooleanArray = BooleanArray(0)
@@ -55,15 +58,28 @@ class MainActivity : AppCompatActivity() {
             nav_view.menu.getItem(1).isChecked = true
         }
 
-        cousineOptions = getOptions("cousine_field.txt")
-        dietaryRestrictionsOptions = getOptions("dietary_restrictions_field.txt")
+        val cousineOptionsNoIndex = getOptions("cousine_field.txt")
+        cousineOptions = setIndexes(cousineOptionsNoIndex)
+
+        val dietaryRestrictionsOptionsNoIndex = getOptions("dietary_restrictions_field.txt")
+        dietaryRestrictionsOptions = setIndexes(dietaryRestrictionsOptionsNoIndex)
         dietaryRestrictionsOptions.removeAt(0)
-        establishmentTypeOptions = getOptions("establishment_type_field.txt")
-        pricesOptions = getOptions("prices_field.txt")
+
+        val establishmentTypeOptionsNoIndex = getOptions("establishment_type_field.txt")
+        establishmentTypeOptions = setIndexes(establishmentTypeOptionsNoIndex)
 
         dietaryRestrictionsStates = BooleanArray(dietaryRestrictionsOptions.count())
         establishmentTypeStates = BooleanArray(establishmentTypeOptions.count())
         cousineStates = BooleanArray(cousineOptions.count())
+
+    }
+
+    private fun setIndexes(optionsNoIndex : ArrayList<RestaurantCriterions>) : ArrayList<RestaurantCriterionsIndexed> {
+        var cousineOptions : ArrayList<RestaurantCriterionsIndexed> = ArrayList()
+        for (i in optionsNoIndex.indices) {
+            cousineOptions.add(RestaurantCriterionsIndexed(optionsNoIndex[i].label, optionsNoIndex[i].value, i))
+        }
+        return cousineOptions
     }
 
     private fun getNextFragmentTag(@IdRes menuId: Int): String =

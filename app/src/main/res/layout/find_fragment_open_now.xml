@@ -12,6 +12,7 @@
         android:checked="true"
         android:text="@string/open_now_text"
         android:textSize="18sp"
+        android:outlineSpotShadowColor="@color/colorPrimaryDark"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"

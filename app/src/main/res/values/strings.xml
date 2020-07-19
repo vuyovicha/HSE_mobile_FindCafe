@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">New_bottom_navigation_ui</string>
+    <string name="app_name">FindCafe</string>
     <string name="title_home">Find</string>
     <string name="title_dashboard">Map</string>
     <string name="title_notifications">Result</string>

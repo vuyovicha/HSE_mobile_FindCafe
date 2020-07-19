@@ -10,11 +10,10 @@ import kotlinx.android.synthetic.main.set_preferences_row.view.*
 class SetPreferencesFragmentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val ESTABLISHMENT_TYPE = "Establishment type"
-        private const val COUSIN = "Cousin"
         private const val DIETARY_RESTRICTIONS = "Dietary restrictions"
     }
 
-    private var setPreferencesFragmentRows: List<RestaurantCriterions> = listOf<RestaurantCriterions>()
+    private var setPreferencesFragmentRows: List<RestaurantCriterionsIndexed> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return SetPreferencesViewHolder(
@@ -28,7 +27,7 @@ class SetPreferencesFragmentAdapter : RecyclerView.Adapter<RecyclerView.ViewHold
 
     override fun getItemCount() = setPreferencesFragmentRows.count()
 
-    fun replaceItems(items: List<RestaurantCriterions>) {
+    fun replaceItems(items: List<RestaurantCriterionsIndexed>) {
         this.setPreferencesFragmentRows = items
         notifyDataSetChanged()
     }
@@ -38,12 +37,15 @@ class SetPreferencesFragmentAdapter : RecyclerView.Adapter<RecyclerView.ViewHold
 
         fun onBindSetPreferencesViewHolder(label: String, index: Int) {
             checkBox.text = label
+            checkBox.isChecked = when(MainActivity.setPreferencesFragmentTag) {
+                ESTABLISHMENT_TYPE ->   MainActivity.establishmentTypeStates[index]
+                DIETARY_RESTRICTIONS -> MainActivity.dietaryRestrictionsStates[index]
+                else -> false
+            }
             checkBox.setOnClickListener {
                 when(MainActivity.setPreferencesFragmentTag) {
                     ESTABLISHMENT_TYPE -> MainActivity.establishmentTypeStates[index] = !MainActivity.establishmentTypeStates[index]
-                    COUSIN -> MainActivity.cousineStates[index] = !MainActivity.cousineStates[index]
                     DIETARY_RESTRICTIONS -> MainActivity.dietaryRestrictionsStates[index] = !MainActivity.dietaryRestrictionsStates[index]
-                    else -> "Not supported fragment tag"
                 }
             }
 

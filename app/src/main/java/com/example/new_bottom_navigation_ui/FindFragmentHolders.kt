@@ -40,7 +40,7 @@ class PreferenceListViewHolder(private val root: View, private val manager : Fra
         private const val DIETARY_RESTRICTIONS = "Dietary restrictions"
     }
 
-    private fun getChosenPreferences(options : ArrayList<RestaurantCriterions>, states : BooleanArray) : String {
+    private fun getChosenPreferences(options : ArrayList<RestaurantCriterionsIndexed>, states : BooleanArray) : String {
         var chosenPreferencesString = ""
         for (i in options.indices) {
             if (states[i]) {
@@ -63,7 +63,7 @@ class PreferenceListViewHolder(private val root: View, private val manager : Fra
 
     fun onBindPreferenceList(row: FindFragmentAdapter.PreferenceList) {
         header.text = row.label
-        var options : ArrayList<RestaurantCriterions> = ArrayList()
+        var options : ArrayList<RestaurantCriterionsIndexed> = ArrayList()
         var states : BooleanArray = BooleanArray(0)
         when (header.text) {
             ESTABLISHMENT_TYPE ->  {
@@ -78,7 +78,6 @@ class PreferenceListViewHolder(private val root: View, private val manager : Fra
                 options = MainActivity.dietaryRestrictionsOptions
                 states = MainActivity.dietaryRestrictionsStates
             }
-            else -> "Not supported fragment tag"
         }
         chosenPreferences.text = getChosenPreferences(options, states)
 

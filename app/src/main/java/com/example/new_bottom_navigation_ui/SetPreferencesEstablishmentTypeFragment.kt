@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.set_preferences_fragment.*
 
@@ -51,6 +52,10 @@ class SetPreferencesEstablishmentTypeFragment : Fragment() {
                 }
             }
         }
+
+        model.data.observe(viewLifecycleOwner, Observer {
+            adapter.notifyDataSetChanged()
+        })
     }
 
 }
