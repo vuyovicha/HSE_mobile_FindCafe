@@ -1,4 +1,4 @@
-package com.example.new_bottom_navigation_ui.ui.home
+package com.example.new_bottom_navigation_ui
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -8,16 +8,17 @@ import com.example.new_bottom_navigation_ui.MainActivity
 import kotlinx.coroutines.MainScope
 
 
+
 class SharedViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    private val initData = MutableLiveData<Int>().apply {
+        value = 1
     }
-    val text: LiveData<String> = _text
 
-    private fun readJSON () {
+    val data : MutableLiveData<Int> = initData
 
-
+    fun changeData() {
+        data.value = data.value?.plus(1)
     }
 
 

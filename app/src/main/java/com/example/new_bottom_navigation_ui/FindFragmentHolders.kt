@@ -1,7 +1,6 @@
 package com.example.new_bottom_navigation_ui
 
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
@@ -33,13 +32,71 @@ class RouteViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
 class PreferenceListViewHolder(private val root: View, private val manager : FragmentManager) : RecyclerView.ViewHolder(root) {
     private val header = root.preferences_header
     private val changeButton = root.change_preferences_button
+    private val chosenPreferences = root.chosen_preferences
+
+    companion object {
+        private const val ESTABLISHMENT_TYPE = "Establishment type"
+        private const val COUSIN = "Cousin"
+        private const val DIETARY_RESTRICTIONS = "Dietary restrictions"
+    }
+
+    private fun getChosenPreferences(options : ArrayList<RestaurantCriterions>, states : BooleanArray) : String {
+        var chosenPreferencesString = ""
+        for (i in options.indices) {
+            if (states[i]) {
+                if (chosenPreferencesString.isNotEmpty()) {
+                    chosenPreferencesString = chosenPreferencesString + ", " + options[i].label
+                } else {
+                    chosenPreferencesString = options[i].label
+                }
+            }
+        }
+
+        if (chosenPreferencesString.isNotEmpty()) {
+            chosenPreferencesString.removeRange(chosenPreferencesString.length - 2, chosenPreferencesString.length - 1)
+        } else {
+            chosenPreferencesString = "None"
+        }
+
+        return chosenPreferencesString
+    }
 
     fun onBindPreferenceList(row: FindFragmentAdapter.PreferenceList) {
         header.text = row.label
+        var options : ArrayList<RestaurantCriterions> = ArrayList()
+        var states : BooleanArray = BooleanArray(0)
+        when (header.text) {
+            ESTABLISHMENT_TYPE ->  {
+                options = MainActivity.establishmentTypeOptions
+                states = MainActivity.establishmentTypeStates
+            }
+            COUSIN -> {
+                options = MainActivity.cousineOptions
+                states = MainActivity.cousineStates
+            }
+            DIETARY_RESTRICTIONS -> {
+                options = MainActivity.dietaryRestrictionsOptions
+                states = MainActivity.dietaryRestrictionsStates
+            }
+            else -> "Not supported fragment tag"
+        }
+        chosenPreferences.text = getChosenPreferences(options, states)
 
         changeButton.setOnClickListener{
             val supportFragmentManager = manager
-            val fragmentTag = SetPreferencesFragment::class.java.simpleName
+            val fragmentTag = when (header.text) {
+                ESTABLISHMENT_TYPE ->  SetPreferencesEstablishmentTypeFragment::class.java.simpleName
+                COUSIN -> SetPreferencesCousinFragment::class.java.simpleName
+                DIETARY_RESTRICTIONS -> SetPreferencesDietaryRestrictionsFragment::class.java.simpleName
+                else -> "Not supported fragment tag"
+            }
+
+            MainActivity.setPreferencesFragmentTag = when(header.text) {
+                ESTABLISHMENT_TYPE ->  ESTABLISHMENT_TYPE
+                COUSIN -> COUSIN
+                DIETARY_RESTRICTIONS -> DIETARY_RESTRICTIONS
+                else -> "Not supported fragment tag"
+            }
 
             supportFragmentManager.commit {
                 supportFragmentManager.fragments.forEach { hide(it) }
@@ -47,9 +104,15 @@ class PreferenceListViewHolder(private val root: View, private val manager : Fra
                 if (fragment != null) {
                     show(fragment)
                 } else {
-                    val nextFragment = SetPreferencesFragment()
+                    val nextFragment = when (header.text) {
+                        ESTABLISHMENT_TYPE ->  SetPreferencesEstablishmentTypeFragment()
+                        COUSIN -> SetPreferencesCousinFragment()
+                        DIETARY_RESTRICTIONS -> SetPreferencesDietaryRestrictionsFragment()
+                        else -> SetPreferencesCousinFragment() //setting random fragment for else
+                    }
                     add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)
                 }
+
             }
         }
 
@@ -68,7 +131,7 @@ class PreferencePriceViewHolder(private val root: View) : RecyclerView.ViewHolde
             1 -> mediumPriceButton.isChecked = true
             2 -> maxPriceButton.isChecked = true
         }
-
+        MainActivity.pricesState = row.checkedButtonIndex
     }
 }
 
@@ -77,7 +140,7 @@ class PreferenceRatingViewHolder(private val root: View) : RecyclerView.ViewHold
 
     fun onBindPreferenceRating(row: FindFragmentAdapter.PreferenceRating) {
         rating.rating = row.rating
-
+        MainActivity.ratingState = row.rating
     }
 }
 
@@ -86,6 +149,7 @@ class PreferenceOpenNowViewHolder(private val root: View) : RecyclerView.ViewHol
 
     fun onBindPreferenceOpenNow(row: FindFragmentAdapter.PreferenceOpenNow) {
         checkbox.isChecked = row.isChecked
+        MainActivity.openState = row.isChecked
 
     }
 }

@@ -1,16 +1,10 @@
 package com.example.new_bottom_navigation_ui
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.annotation.IdRes
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,26 +18,15 @@ class MainActivity : AppCompatActivity() {
         var dietaryRestrictionsOptions : ArrayList<RestaurantCriterions> = ArrayList()
         var establishmentTypeOptions : ArrayList<RestaurantCriterions> = ArrayList()
         var pricesOptions : ArrayList<RestaurantCriterions> = ArrayList()
+        var setPreferencesFragmentTag = "Cousin"
+        var dietaryRestrictionsStates: BooleanArray = BooleanArray(0)
+        var establishmentTypeStates: BooleanArray = BooleanArray(0)
+        var cousineStates: BooleanArray = BooleanArray(0)
+        var pricesState = 0
+        var ratingState = 3.toFloat()
+        var openState = true
     }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-//
-//        val navController = findNavController(R.id.nav_host_fragment)
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-//        val appBarConfiguration = AppBarConfiguration(setOf(
-//                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        navView.setupWithNavController(navController)
-//
-//        cousineOptions = getOptions("cousine_field.txt")
-//        dietaryRestrictionsOptions = getOptions("dietary_restrictions_field.txt")
-//        establishmentTypeOptions = getOptions("establishment_type_field.txt")
-//        pricesOptions = getOptions("prices_field.txt")
-//    }
 
     fun getOptions(fileName: String) : ArrayList<RestaurantCriterions>
     {
@@ -57,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         return assets.open(fileName).bufferedReader().use { it.readText() }
     }
 
-    /////
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,8 +57,13 @@ class MainActivity : AppCompatActivity() {
 
         cousineOptions = getOptions("cousine_field.txt")
         dietaryRestrictionsOptions = getOptions("dietary_restrictions_field.txt")
+        dietaryRestrictionsOptions.removeAt(0)
         establishmentTypeOptions = getOptions("establishment_type_field.txt")
         pricesOptions = getOptions("prices_field.txt")
+
+        dietaryRestrictionsStates = BooleanArray(dietaryRestrictionsOptions.count())
+        establishmentTypeStates = BooleanArray(establishmentTypeOptions.count())
+        cousineStates = BooleanArray(cousineOptions.count())
     }
 
     private fun getNextFragmentTag(@IdRes menuId: Int): String =

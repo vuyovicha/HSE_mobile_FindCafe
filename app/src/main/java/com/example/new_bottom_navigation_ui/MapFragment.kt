@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import com.example.new_bottom_navigation_ui.R
-import com.example.new_bottom_navigation_ui.ui.home.SharedViewModel
+import com.example.new_bottom_navigation_ui.SharedViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer

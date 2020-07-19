@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.new_bottom_navigation_ui.R
-import com.example.new_bottom_navigation_ui.ui.home.SharedViewModel
+import com.example.new_bottom_navigation_ui.SharedViewModel
 import kotlinx.android.synthetic.main.find_fragment.*
 
 class FindFragment : Fragment() {
@@ -25,15 +25,8 @@ class FindFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View? = inflater.inflate(R.layout.find_fragment, container, false)
 
-        val root = inflater.inflate(R.layout.find_fragment, container, false)
-//        model.text.observe(viewLifecycleOwner, Observer {
-//            //use it here
-//        })
-
-        return root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,20 +38,19 @@ class FindFragment : Fragment() {
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Establishment type"))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Cousin"))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Dietary restrictions"))
-        findFragmentRows.add(FindFragmentAdapter.PreferencePrice(0))
-        findFragmentRows.add(FindFragmentAdapter.PreferenceRating(3.toFloat()))
-        findFragmentRows.add(FindFragmentAdapter.PreferenceOpenNow(true))
+        findFragmentRows.add(FindFragmentAdapter.PreferencePrice(MainActivity.pricesState))
+        findFragmentRows.add(FindFragmentAdapter.PreferenceRating(MainActivity.ratingState))
+        findFragmentRows.add(FindFragmentAdapter.PreferenceOpenNow(MainActivity.openState))
 
         adapter = FindFragmentAdapter(requireActivity().supportFragmentManager)
         adapter.replaceItems(findFragmentRows)
         find_fragment_recycler.adapter = adapter
         find_fragment_recycler.layoutManager = LinearLayoutManager(context)
 
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+        model.data.observe(viewLifecycleOwner, Observer {
+            adapter.notifyDataSetChanged()
+        })
 
     }
+
 }

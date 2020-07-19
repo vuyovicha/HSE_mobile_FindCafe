@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.new_bottom_navigation_ui.R
-import com.example.new_bottom_navigation_ui.ui.home.SharedViewModel
+import com.example.new_bottom_navigation_ui.SharedViewModel
 import kotlinx.android.synthetic.main.result_fragment.*
 
 class ResultFragment : Fragment() {
