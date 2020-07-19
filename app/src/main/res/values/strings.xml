@@ -15,4 +15,5 @@
     <string name="rating_header_text">Minimum rating</string>
     <string name="submit_button_text">Submit</string>
     <string name="go_back_button_text">Go back</string>
+    <string name="change_button_text">Change</string>
 </resources>

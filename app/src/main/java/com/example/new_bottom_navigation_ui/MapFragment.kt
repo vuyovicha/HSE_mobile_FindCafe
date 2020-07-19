@@ -17,6 +17,7 @@ import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.map_fragment.*
 import kotlinx.android.synthetic.main.map_fragment.view.*
 
@@ -59,6 +60,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
                 }
             }
+            requireActivity().nav_view.menu.getItem(0).isChecked = true
+
         }
 
 
