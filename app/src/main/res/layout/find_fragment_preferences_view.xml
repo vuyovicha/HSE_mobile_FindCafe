@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/preferences_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +42,51 @@
         android:text="@string/change_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="14dp" />
+        android:textSize="14dp" />-->
+
+    <View
+        android:id="@+id/change_preferences_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/drop_list_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </View>
+
+    <TextView
+        android:id="@+id/preferences_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Параметры"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/change_preferences_button"
+        app:layout_constraintStart_toStartOf="@+id/change_preferences_button"
+        app:layout_constraintTop_toTopOf="@+id/change_preferences_button" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/change_preferences_button"
+        app:layout_constraintEnd_toEndOf="@+id/change_preferences_button"
+        app:layout_constraintTop_toTopOf="@+id/change_preferences_button"
+        app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
+
+    <TextView
+        android:id="@+id/chosen_preferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Chosen preferences here"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_preferences_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

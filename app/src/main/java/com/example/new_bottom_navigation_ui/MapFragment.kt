@@ -8,8 +8,6 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
-import androidx.lifecycle.Observer
-import com.example.new_bottom_navigation_ui.R
 import com.example.new_bottom_navigation_ui.ui.home.SharedViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -41,7 +39,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 ////            //use it here
 ////        })
 
-        val button = root.find_button as Button
+        val button = root.find_view
 
         button.setOnClickListener{
             val supportFragmentManager = requireActivity().supportFragmentManager

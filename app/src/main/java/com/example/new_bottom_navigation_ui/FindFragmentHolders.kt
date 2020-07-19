@@ -25,7 +25,7 @@ class RouteViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
     private val routePoint = root.route_point
 
     fun onBindRoute(row: FindFragmentAdapter.Route) {
-        routePoint.text = row.label
+        routePoint.hint = row.label
 
     }
 }

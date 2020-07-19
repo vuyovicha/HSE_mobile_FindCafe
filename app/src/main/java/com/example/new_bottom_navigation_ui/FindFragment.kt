@@ -38,7 +38,7 @@ class FindFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val findFragmentRows = mutableListOf<FindFragmentAdapter.FindFragmentRow>()
-        findFragmentRows.add(FindFragmentAdapter.Header("Route"))
+        //findFragmentRows.add(FindFragmentAdapter.Header("Route"))
         findFragmentRows.add(FindFragmentAdapter.Route("From"))
         findFragmentRows.add(FindFragmentAdapter.Route("To"))
         findFragmentRows.add(FindFragmentAdapter.Header("Cafe preferences"))
@@ -53,6 +53,7 @@ class FindFragment : Fragment() {
         adapter.replaceItems(findFragmentRows)
         find_fragment_recycler.adapter = adapter
         find_fragment_recycler.layoutManager = LinearLayoutManager(context)
+        find_fragment_recycler.addItemDecoration(SpaceItemDecoration())
 
     }
 
