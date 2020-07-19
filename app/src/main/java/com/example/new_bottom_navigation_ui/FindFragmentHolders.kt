@@ -1,6 +1,9 @@
 package com.example.new_bottom_navigation_ui
 
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.find_fragment_header.view.*
 import kotlinx.android.synthetic.main.find_fragment_open_now.view.*
@@ -27,11 +30,28 @@ class RouteViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
     }
 }
 
-class PreferenceListViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
+class PreferenceListViewHolder(private val root: View, private val manager : FragmentManager) : RecyclerView.ViewHolder(root) {
     private val header = root.preferences_header
+    private val changeButton = root.change_preferences_button
 
     fun onBindPreferenceList(row: FindFragmentAdapter.PreferenceList) {
         header.text = row.label
+
+        changeButton.setOnClickListener{
+            val supportFragmentManager = manager
+            val fragmentTag = SetPreferencesFragment::class.java.simpleName
+
+            supportFragmentManager.commit {
+                supportFragmentManager.fragments.forEach { hide(it) }
+                val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
+                if (fragment != null) {
+                    show(fragment)
+                } else {
+                    val nextFragment = SetPreferencesFragment()
+                    add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)
+                }
+            }
+        }
 
     }
 }

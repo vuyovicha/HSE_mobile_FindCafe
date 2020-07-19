@@ -102,7 +102,6 @@ class MainActivity : AppCompatActivity() {
             val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
             if (fragment != null) {
                 show(fragment)
-                println(fragmentTag)
             } else {
                 val nextFragment = getNextFragmentInstance(id)
                 add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)

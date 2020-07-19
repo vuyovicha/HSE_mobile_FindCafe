@@ -2,10 +2,11 @@ package com.example.new_bottom_navigation_ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.IllegalArgumentException
 
-class FindFragmentAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FindFragmentAdapter(private val man : FragmentManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var findFragmentRows: List<FindFragmentRow> = listOf<FindFragmentRow>()
 
@@ -37,7 +38,7 @@ class FindFragmentAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     .inflate(R.layout.find_fragment_route_view, parent, false))
             PREFERENCE_LIST -> PreferenceListViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.find_fragment_preferences_view, parent, false))
+                    .inflate(R.layout.find_fragment_preferences_view, parent, false), man)
             PREFERENCE_PRICE -> PreferencePriceViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.find_fragment_prices, parent, false))

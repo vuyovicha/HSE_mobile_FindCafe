@@ -53,7 +53,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
                 if (fragment != null) {
                     show(fragment)
-                    println(fragmentTag)
                 } else {
                     val nextFragment = FindFragment()
                     add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)

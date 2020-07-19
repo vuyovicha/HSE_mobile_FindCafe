@@ -49,7 +49,7 @@ class FindFragment : Fragment() {
         findFragmentRows.add(FindFragmentAdapter.PreferenceRating(3.toFloat()))
         findFragmentRows.add(FindFragmentAdapter.PreferenceOpenNow(true))
 
-        adapter = FindFragmentAdapter()
+        adapter = FindFragmentAdapter(requireActivity().supportFragmentManager)
         adapter.replaceItems(findFragmentRows)
         find_fragment_recycler.adapter = adapter
         find_fragment_recycler.layoutManager = LinearLayoutManager(context)
