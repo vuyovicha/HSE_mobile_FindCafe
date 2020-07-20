@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         var pricesState = 0
         var ratingState = 3.toFloat()
         var openState = true
+        var fromPointFlag = false
+        var foundRestaurants : ArrayList<Restaurant> = ArrayList()
     }
 
 

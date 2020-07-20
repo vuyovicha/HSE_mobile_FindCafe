@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_background"
+    android:elevation="10dp"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginVertical="5dp">
 
     <TextView
         android:id="@+id/preferences_header"
@@ -26,7 +30,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="10dp"
         android:text="Chosen preferences here"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@id/change_preferences_button"
         app:layout_constraintStart_toStartOf="parent" />
@@ -39,9 +43,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
+        android:backgroundTint="@color/colorAccentBright"
         android:text="@string/change_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="14dp" />
+        android:textSize="14dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

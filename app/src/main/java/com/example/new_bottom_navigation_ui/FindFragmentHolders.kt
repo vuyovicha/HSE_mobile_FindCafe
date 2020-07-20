@@ -21,10 +21,10 @@ class HeaderViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
 }
 
 class RouteViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
-    private val routePoint = root.route_point
+    private val button = root.set_point_button
 
     fun onBindRoute(row: FindFragmentAdapter.Route) {
-        routePoint.text = row.label
+        button.text = row.label
 
     }
 }

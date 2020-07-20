@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#4A7E78</color>
     <color name="colorPrimaryDark">#1F615A</color>
-    <color name="colorAccent">#CFE1DF</color>
+    <color name="colorAccent">#608F8A</color>
     <color name="searchViewColor">#CFE1DF</color>
+    <color name="colorAccentBright">#99BDBA</color>
 </resources>

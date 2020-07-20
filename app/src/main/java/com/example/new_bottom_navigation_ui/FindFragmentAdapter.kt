@@ -33,9 +33,20 @@ class FindFragmentAdapter(private val man : FragmentManager) : RecyclerView.Adap
             HEADER -> HeaderViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.find_fragment_header, parent, false))
-            ROUTE -> RouteViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.find_fragment_route_view, parent, false))
+            ROUTE -> {
+                MainActivity.fromPointFlag = !MainActivity.fromPointFlag
+                if (MainActivity.fromPointFlag) {
+                    RouteViewHolder(
+                        LayoutInflater.from(parent.context)
+                            .inflate(R.layout.find_fragment_route_view, parent, false)
+                    )
+                } else {
+                    RouteViewHolder(
+                        LayoutInflater.from(parent.context)
+                            .inflate(R.layout.find_fragment_route_view_to, parent, false)
+                    )
+                }
+            }
             PREFERENCE_LIST -> PreferenceListViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.find_fragment_preferences_view, parent, false), man)
@@ -55,8 +66,8 @@ class FindFragmentAdapter(private val man : FragmentManager) : RecyclerView.Adap
     override fun getItemViewType(position: Int): Int {
         return when (findFragmentRows[position]) {
             is Header -> HEADER
-            is Route -> ROUTE
-            is PreferenceList -> PREFERENCE_LIST
+            is FindFragmentAdapter.Route -> ROUTE
+            is FindFragmentAdapter.PreferenceList -> PREFERENCE_LIST
             is PreferencePrice -> PREFERENCE_PRICE
             is PreferenceRating -> PREFERENCE_RATING
             is PreferenceOpenNow -> PREFERENCE_OPEN_NOW
