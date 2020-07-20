@@ -34,7 +34,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.map_fragment, container, false)
+        val root = inflater.inflate(R.layout.map_fragment_container, container, false)
 //        model.text.observe(viewLifecycleOwner, Observer {
 ////            //use it here
 ////        })
