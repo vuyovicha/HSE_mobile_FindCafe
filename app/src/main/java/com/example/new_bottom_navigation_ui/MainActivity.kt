@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         var cousineOptions : ArrayList<RestaurantCriterionsIndexed> = ArrayList()
         var dietaryRestrictionsOptions : ArrayList<RestaurantCriterionsIndexed> = ArrayList()
         var establishmentTypeOptions : ArrayList<RestaurantCriterionsIndexed> = ArrayList()
+        var pricesOptions : ArrayList<RestaurantCriterionsIndexed> = ArrayList()
         var setPreferencesFragmentTag = "Cousin"
         var dietaryRestrictionsStates: BooleanArray = BooleanArray(0)
         var establishmentTypeStates: BooleanArray = BooleanArray(0)
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         var openState = true
         var fromPointFlag = false
         var foundRestaurants : ArrayList<Restaurant> = ArrayList()
+        var fromPoint : Point = Point()
+        var toPoint : Point = Point()
     }
 
 
@@ -69,6 +72,9 @@ class MainActivity : AppCompatActivity() {
 
         val establishmentTypeOptionsNoIndex = getOptions("establishment_type_field.txt")
         establishmentTypeOptions = setIndexes(establishmentTypeOptionsNoIndex)
+
+        val pricesOptionsNoIndex = getOptions("prices_field.txt")
+        pricesOptions = setIndexes(pricesOptionsNoIndex)
 
         dietaryRestrictionsStates = BooleanArray(dietaryRestrictionsOptions.count())
         establishmentTypeStates = BooleanArray(establishmentTypeOptions.count())

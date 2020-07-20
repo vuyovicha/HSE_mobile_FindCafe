@@ -35,6 +35,8 @@ data class Restaurant(
     private val establishmentType : ArrayList<String>
 )
 
+data class Point(var latitude: String = "", var longitude: String = "")
+
 class FindFragment : Fragment() {
 
     private val client = OkHttpClient()
@@ -82,14 +84,36 @@ class FindFragment : Fragment() {
 
     }
 
+    private fun getStringListValues(states : BooleanArray, options : ArrayList<RestaurantCriterionsIndexed>) : String {
+        var list = ""
+        for (i in options.indices) {
+            if (states[i]) {
+                if (list.isNotEmpty()) list += ","
+                list += options[i].value
+            }
+        }
+        return list
+    }
+
     private fun sendRequest() {
-        val prices = "&prices_restaurants=10953"
-        val cousinType = "&combined_food=10660"
-        val distance = "&distance=5"
-        val establishmentType = "&restaurant_tagcategory=10591"
-        val openNow = "open_now=true"
-        val dietaryRestrictions = "&dietary_restrictions=10665"
-        val rating = "&min_rating=3"
+        val prices = "&prices_restaurants=" + MainActivity.pricesOptions[MainActivity.pricesState].value
+        val openNow = "open_now=" + MainActivity.openState.toString()
+        var rating = "&min_rating=3"
+        if (MainActivity.ratingState >= 3) {
+            rating = "&min_rating=" + MainActivity.ratingState.toString()
+        }
+
+        val cousinType = "&combined_food=" + getStringListValues(MainActivity.cousineStates, MainActivity.cousineOptions)
+        val dietaryRestrictions = "&dietary_restrictions=" + getStringListValues(MainActivity.dietaryRestrictionsStates, MainActivity.dietaryRestrictionsOptions)
+        val establishmentType = "&restaurant_tagcategory=" + getStringListValues(MainActivity.establishmentTypeStates, MainActivity.establishmentTypeOptions)
+
+        val distance = "&distance=10"
+
+
+        //todo uncomment tis stuff
+//        val centerPoint : Point = CalculatingPoints.getSegmentCenter(MainActivity.fromPoint, MainActivity.toPoint)
+//        val latitude = "&latitude=" + centerPoint.latitude
+//        val longitude = "&longitude=" + centerPoint.longitude
         val latitude = "&latitude=12.91285"
         val longitude = "&longitude=100.87808"
 
