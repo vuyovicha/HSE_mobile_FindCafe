@@ -12,9 +12,19 @@
     <string name="find_cafe_text">Find cafe...</string>
     <string name="header_text">Route</string>
     <string name="price_header_text">Minimum price</string>
+    <string name="any_rating">Any</string>  \u2b50
+    <string name="three_rating">3.0 \u2b50</string>
+    <string name="four_rating">4.0 \u2b50</string>
+    <string name="five_rating">5.0 \u2b50</string>
     <string name="rating_header_text">Minimum rating</string>
     <string name="submit_button_text">Submit</string>
     <string name="go_back_button_text">Go back</string>
     <string name="change_button_text">Change</string>
     <string name="hours_header">Hours</string>
+    <string name="see_route_text">See route</string>
+    <string name="see_results_on_map_text">See results on map</string>
+    <string name="any_price">Any</string>
+    <string name="min_price">$</string>
+    <string name="medium_price">$$ - $$$</string>
+    <string name="max_price">$$$$</string>
 </resources>

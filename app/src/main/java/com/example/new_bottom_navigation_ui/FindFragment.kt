@@ -1,16 +1,21 @@
 package com.example.new_bottom_navigation_ui
 
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.Drawable.createFromStream
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.new_bottom_navigation_ui.R
 import com.example.new_bottom_navigation_ui.SharedViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.find_fragment.*
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -18,21 +23,23 @@ import okhttp3.Request
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
+import java.io.InputStream
+import java.net.URL
 
 data class Restaurant(
-    private val name : String,
-    private val latitude : String,
-    private val longitude : String,
-    private val locationString : String,
-    private val smallPhotoUrl : String,
-    private val largePhotoUrl : String,
-    private val rating : String,
-    private val priceLevel : String,
-    private val description : String,
-    private val address : String,
-    private val cousin : ArrayList<String>,
-    private val dietaryRestrictions : ArrayList<String>,
-    private val establishmentType : ArrayList<String>
+    val name : String,
+    val latitude : String,
+    val longitude : String,
+    val locationString : String,
+    val smallPhotoUrl : String,
+    val largePhotoUrl : String,
+    val rating : String,
+    val priceLevel : String,
+    val description : String,
+    val address : String,
+    val cousin : ArrayList<String>,
+    val dietaryRestrictions : ArrayList<String>,
+    val establishmentType : ArrayList<String>
 )
 
 data class Point(var latitude: String = "", var longitude: String = "")
@@ -96,36 +103,54 @@ class FindFragment : Fragment() {
     }
 
     private fun sendRequest() {
-        val prices = "&prices_restaurants=" + MainActivity.pricesOptions[MainActivity.pricesState].value
-        val openNow = "open_now=" + MainActivity.openState.toString()
-        var rating = "&min_rating=3"
-        if (MainActivity.ratingState >= 3) {
-            rating = "&min_rating=" + MainActivity.ratingState.toString()
-        }
+        val prices : String
+        if (MainActivity.pricesState > 0) prices = "&prices_restaurants=" + MainActivity.pricesOptions[MainActivity.pricesState - 1].value
+        else prices = ""
 
-        val cousinType = "&combined_food=" + getStringListValues(MainActivity.cousineStates, MainActivity.cousineOptions)
-        val dietaryRestrictions = "&dietary_restrictions=" + getStringListValues(MainActivity.dietaryRestrictionsStates, MainActivity.dietaryRestrictionsOptions)
-        val establishmentType = "&restaurant_tagcategory=" + getStringListValues(MainActivity.establishmentTypeStates, MainActivity.establishmentTypeOptions)
+        val openNow = "&open_now=" + MainActivity.openState.toString()
+
+        val rating : String
+        if (MainActivity.ratingState > 0) rating = "&min_rating=" + MainActivity.ratingState.toString()
+        else rating = ""
+
+        val getCousinString = getStringListValues(MainActivity.cousineStates, MainActivity.cousineOptions)
+        val cousinType : String
+        if (getCousinString.isNotEmpty()) cousinType = "&combined_food=$getCousinString"
+        else cousinType = ""
+
+        val getDietaryRestrictionsString = getStringListValues(MainActivity.dietaryRestrictionsStates, MainActivity.dietaryRestrictionsOptions)
+        val dietaryRestrictions : String
+        if (getDietaryRestrictionsString.isNotEmpty()) dietaryRestrictions = "&dietary_restrictions=$getDietaryRestrictionsString"
+        else dietaryRestrictions = ""
+
+        val getEstablishmentTypeString = getStringListValues(MainActivity.dietaryRestrictionsStates, MainActivity.dietaryRestrictionsOptions)
+        val establishmentType : String
+        if (getEstablishmentTypeString.isNotEmpty()) establishmentType = "&restaurant_tagcategory=$getEstablishmentTypeString"
+        else establishmentType = ""
 
         val distance = "&distance=10"
 
 
-        //todo uncomment tis stuff
+            //todo uncomment this stuff
 //        val centerPoint : Point = CalculatingPoints.getSegmentCenter(MainActivity.fromPoint, MainActivity.toPoint)
 //        val latitude = "&latitude=" + centerPoint.latitude
 //        val longitude = "&longitude=" + centerPoint.longitude
         val latitude = "&latitude=12.91285"
         val longitude = "&longitude=100.87808"
 
+        val url = "https://tripadvisor1.p.rapidapi.com/restaurants/list-by-latlng?limit=30&currency=EUR$prices$cousinType$distance$establishmentType$openNow$dietaryRestrictions&lunit=km&lang=en_US$rating$latitude$longitude"
+
         val request = Request.Builder()
-            .url("https://tripadvisor1.p.rapidapi.com/restaurants/list-by-latlng?limit=30&currency=EUR$prices$cousinType$distance$establishmentType$openNow$dietaryRestrictions&lunit=km&lang=en_US$rating$latitude$longitude")
+            .url(url)
             .get()
             .addHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com")
             .addHeader("x-rapidapi-key", "9a35fdaa8bmsh64d201965518884p14fa46jsne83376c9e265")
             .build()
 
         client.newCall(request).enqueue(object: Callback {
-            override fun onFailure(call: okhttp3.Call, e: IOException) { }
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                //change state to error here
+            }
             override fun onResponse(call: okhttp3.Call, response: Response) {
                 val requestedString = response.body()?.string().toString()
                 val jsonObject = JSONObject(requestedString)
@@ -135,8 +160,22 @@ class FindFragment : Fragment() {
                 val items = jsonObject.getJSONArray("data")
                 for (i in 1 until items.length()) {
                     val item = JSONObject(items[i].toString())
-                    if (item.length() > 40) {
-                        val photo = JSONObject(JSONObject(item.getString("photo")).getString("images"))
+                    if (item.length() > 42) {
+                        //no photo available urls
+                        var smallPhoto = "https://lh3.googleusercontent.com/proxy/UCeMI56_IXsHAnNTahVtGH5AjI6y4kg6QA3LSXPvL8-3Qsj5-h_JrnPChuLReQSuQKRBA9c77ZlCrtcffgjSuY2il4_4KQ92Tpb9sG133prlqeg"
+                        var largePhoto = "https://lh3.googleusercontent.com/proxy/UCeMI56_IXsHAnNTahVtGH5AjI6y4kg6QA3LSXPvL8-3Qsj5-h_JrnPChuLReQSuQKRBA9c77ZlCrtcffgjSuY2il4_4KQ92Tpb9sG133prlqeg"
+
+                        if (item.has("photo")) {
+                            val photoObject = JSONObject(JSONObject(item.getString("photo")).getString("images"))
+                            smallPhoto = JSONObject(photoObject.getString("small")).getString("url")
+                            largePhoto = JSONObject(photoObject.getString("large")).getString("url")
+                        }
+
+                        var rating = "-"
+                        if (item.has("rating")) {
+                            rating = item.getString("rating")
+                        }
+
                         val cousinesList = getPreferenceList("cuisine", item)
                         val dietaryRestrictionsList = getPreferenceList("dietary_restrictions", item)
                         val establishmentTypeList = getPreferenceList("establishment_types", item)
@@ -146,22 +185,40 @@ class FindFragment : Fragment() {
                                 item.getString("latitude"),
                                 item.getString("longitude"),
                                 item.getString("location_string"),
-                                JSONObject(photo.getString("small")).getString("url"),
-                                JSONObject(photo.getString("large")).getString("url"),
-                                item.getString("rating"),
+                                smallPhoto,
+                                largePhoto,
+                                rating,
                                 item.getString("price_level"),
                                 item.getString("description"),
                                 item.getString("address"),
                                 cousinesList,
                                 dietaryRestrictionsList,
                                 establishmentTypeList
-                                )
+                            )
                         )
                     }
                 }
+                goToResultFragment()
             }
         })
+    }
 
+
+    private fun goToResultFragment() {
+        val supportFragmentManager = requireActivity().supportFragmentManager
+        val fragmentTag = ResultFragment::class.java.simpleName
+
+        supportFragmentManager.commit {
+            supportFragmentManager.fragments.forEach { hide(it) }
+            val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
+            if (fragment != null) {
+                show(fragment)
+            } else {
+                val nextFragment = ResultFragment()
+                add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)
+
+            }
+        }
     }
 
     private fun getPreferenceList(preference : String, jsonItem : JSONObject) : ArrayList<String>{

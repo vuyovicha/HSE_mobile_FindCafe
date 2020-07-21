@@ -21,20 +21,64 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/reviewRating"/>
+        app:layout_constraintBottom_toTopOf="@id/rating_radio_group"/>
 
-    <androidx.appcompat.widget.AppCompatRatingBar
-        android:id="@+id/reviewRating"
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:id="@+id/rating_radio_group"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:numStars="5"
-        android:rating="4"
-        android:stepSize="1"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" >
+
+
+        <RadioButton
+            android:id="@+id/any_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:button="@null"
+            android:background="@drawable/custom_radio_button"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:text="@string/any_rating" />
+
+        <RadioButton
+            android:id="@+id/three_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:button="@null"
+            android:background="@drawable/custom_radio_button"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:text="@string/three_rating" />
+
+        <RadioButton
+            android:id="@+id/four_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:button="@null"
+            android:background="@drawable/custom_radio_button"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:text="@string/four_rating" />
+
+        <RadioButton
+            android:id="@+id/five_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:button="@null"
+            android:background="@drawable/custom_radio_button"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:text="@string/five_rating" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

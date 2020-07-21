@@ -24,7 +24,7 @@ class FindFragmentAdapter(private val man : FragmentManager) : RecyclerView.Adap
     class Route(val label: String) : FindFragmentRow
     class PreferenceList(val label: String) : FindFragmentRow
     class PreferencePrice(val checkedButtonIndex: Int) : FindFragmentRow
-    class PreferenceRating(val rating: Float) : FindFragmentRow
+    class PreferenceRating(val ratingIndex: Int) : FindFragmentRow
     class PreferenceOpenNow(val isChecked: Boolean) : FindFragmentRow
 
 
