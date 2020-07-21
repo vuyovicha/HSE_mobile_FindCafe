@@ -19,6 +19,7 @@ import com.google.maps.model.LatLng
 import com.hse.findcafe.PlaceHolder
 import com.hse.findcafe.ui.home.RouteHolder
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.map_fragment.*
 import kotlinx.android.synthetic.main.map_fragment.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -68,6 +69,28 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             }
             requireActivity().nav_view.menu.getItem(0).isChecked = true
 
+        }
+
+        root.my_location.setOnClickListener {
+            if (map != null) {
+                val bounds = LatLngBounds.builder()
+                for (i in places.indices) {
+                    bounds.include(
+                        com.google.android.gms.maps.model.LatLng(
+                            places[i].lat,
+                            places[i].lng
+                        )
+                    )
+                }
+                map.moveCamera(
+                    CameraUpdateFactory.newLatLngBounds(
+                        bounds.build(),
+                        width,
+                        width,
+                        25
+                    )
+                )
+            }
         }
 
 
