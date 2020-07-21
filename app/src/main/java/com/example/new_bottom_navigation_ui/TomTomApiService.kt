@@ -1,9 +1,12 @@
 package com.example.new_bottom_navigation_ui
 
 
-import com.hse.findcafe.PlaceHolder
-import com.hse.findcafe.ui.home.RouteHolder
+import android.widget.Toast
+import com.example.new_bottom_navigation_ui.PlaceHolder
+import com.example.new_bottom_navigation_ui.RouteHolder
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -21,7 +24,7 @@ interface TomTomApiService {
                @Path("lng2") lng2: Double): Call<RouteHolder>
 
     @GET("https://api.tomtom.com/search/2/search/{request}.json/?key=mvGcs6aeG2AtpsnUn1yr4hdNBUB7gVkG")
-    fun find(@Path("request") request: String): Call<PlaceHolder>
+    fun find(@Path("request") request: String, @Query("language") language: String): Call<PlaceHolder>
 
     companion object Factory {
         fun create(): TomTomApiService {
@@ -32,5 +35,7 @@ interface TomTomApiService {
 
             return retrofit.create(TomTomApiService::class.java);
         }
+
+
     }
 }

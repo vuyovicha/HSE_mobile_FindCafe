@@ -1,8 +1,8 @@
-package com.hse.findcafe
+package com.example.new_bottom_navigation_ui
 
 data class PlaceHolder(
     val results: List<Result>,
-    val summary: Summary
+    val summary: SummaryPlace
 )
 
 data class Address(
@@ -46,7 +46,7 @@ data class Result(
     val viewport: Viewport
 )
 
-data class Summary(
+data class SummaryPlace(
     val fuzzyLevel: Int,
     val numResults: Int,
     val offset: Int,

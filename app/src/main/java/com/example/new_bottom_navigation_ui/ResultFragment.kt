@@ -28,20 +28,19 @@ class ResultFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View?  = inflater.inflate(R.layout.result_fragment, container, false)
+    ): View? = inflater.inflate(R.layout.result_fragment, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().nav_view.menu.getItem(2).isChecked = true
         adapter = ResultFragmentAdapter(requireActivity().supportFragmentManager)
         adapter.replaceItems(MainActivity.foundRestaurants)
         find_fragment_recycler.adapter = adapter
         find_fragment_recycler.layoutManager = LinearLayoutManager(context)
 
     }
+    
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        if (isVisibleToUser) requireActivity().nav_view.menu.getItem(2).isChecked = true
-    }
 
 }

@@ -1,4 +1,4 @@
-package com.hse.findcafe.ui.home
+package com.example.new_bottom_navigation_ui
 
 data class RouteHolder(
     val formatVersion: String,
@@ -7,7 +7,7 @@ data class RouteHolder(
 
 data class Leg(
     val points: List<Point>,
-    val summary: Summary
+    val summary: SummaryRoute
 )
 
 data class Point(
@@ -18,7 +18,7 @@ data class Point(
 data class Route(
     val legs: List<Leg>,
     val sections: List<Section>,
-    val summary: SummaryX
+    val summary: SummaryRoute
 )
 
 data class Section(
@@ -28,15 +28,7 @@ data class Section(
     val travelMode: String
 )
 
-data class Summary(
-    val arrivalTime: String,
-    val departureTime: String,
-    val lengthInMeters: Int,
-    val trafficDelayInSeconds: Int,
-    val travelTimeInSeconds: Int
-)
-
-data class SummaryX(
+data class SummaryRoute(
     val arrivalTime: String,
     val departureTime: String,
     val lengthInMeters: Int,

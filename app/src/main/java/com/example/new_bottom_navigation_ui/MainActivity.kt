@@ -22,6 +22,8 @@ class RestaurantCriterions(val label : String, val value : String)
 
 class  RestaurantCriterionsIndexed (val label : String, val value : String, val index : Int)
 
+class DisplayAddress (var address : String = "", var coordinates : PointString = PointString())
+
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -37,11 +39,12 @@ class MainActivity : AppCompatActivity() {
         var ratingState = 0
         var openState = true
         var fromPointFlag = false
+        var routePosition = 0
         var foundRestaurants : ArrayList<Restaurant> = ArrayList()
-        var fromPoint : Point = Point()
-        var toPoint : Point = Point()
         var mgr: LocationManager? = null
         const val GPS_ACCESS_CODE = 455
+        var fromAddress = DisplayAddress()
+        var toAddress = DisplayAddress()
     }
 
 

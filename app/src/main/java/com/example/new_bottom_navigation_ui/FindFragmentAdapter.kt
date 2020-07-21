@@ -38,12 +38,12 @@ class FindFragmentAdapter(private val man : FragmentManager) : RecyclerView.Adap
                 if (MainActivity.fromPointFlag) {
                     RouteViewHolder(
                         LayoutInflater.from(parent.context)
-                            .inflate(R.layout.find_fragment_route_view, parent, false)
+                            .inflate(R.layout.find_fragment_route_view, parent, false), man
                     )
                 } else {
                     RouteViewHolder(
                         LayoutInflater.from(parent.context)
-                            .inflate(R.layout.find_fragment_route_view_to, parent, false)
+                            .inflate(R.layout.find_fragment_route_view_to, parent, false), man
                     )
                 }
             }
@@ -66,8 +66,8 @@ class FindFragmentAdapter(private val man : FragmentManager) : RecyclerView.Adap
     override fun getItemViewType(position: Int): Int {
         return when (findFragmentRows[position]) {
             is Header -> HEADER
-            is FindFragmentAdapter.Route -> ROUTE
-            is FindFragmentAdapter.PreferenceList -> PREFERENCE_LIST
+            is Route -> ROUTE
+            is PreferenceList -> PREFERENCE_LIST
             is PreferencePrice -> PREFERENCE_PRICE
             is PreferenceRating -> PREFERENCE_RATING
             is PreferenceOpenNow -> PREFERENCE_OPEN_NOW
@@ -78,7 +78,7 @@ class FindFragmentAdapter(private val man : FragmentManager) : RecyclerView.Adap
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
             HEADER -> (holder as HeaderViewHolder).onBindHeader(findFragmentRows[position] as Header)
-            ROUTE -> (holder as RouteViewHolder).onBindRoute(findFragmentRows[position] as Route)
+            ROUTE -> (holder as RouteViewHolder).onBindRoute(findFragmentRows[position] as Route, position)
             PREFERENCE_LIST -> (holder as PreferenceListViewHolder).onBindPreferenceList(findFragmentRows[position] as PreferenceList)
             PREFERENCE_PRICE -> (holder as PreferencePriceViewHolder).onBindPreferencePrice(findFragmentRows[position] as PreferencePrice)
             PREFERENCE_RATING -> (holder as PreferenceRatingViewHolder).onBindPreferenceRating(findFragmentRows[position] as PreferenceRating)

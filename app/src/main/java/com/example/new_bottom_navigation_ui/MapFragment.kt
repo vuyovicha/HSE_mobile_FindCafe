@@ -16,8 +16,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.google.maps.model.LatLng
-import com.hse.findcafe.PlaceHolder
-import com.hse.findcafe.ui.home.RouteHolder
+import com.example.new_bottom_navigation_ui.PlaceHolder
+import com.example.new_bottom_navigation_ui.RouteHolder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.map_fragment.*
 import kotlinx.android.synthetic.main.map_fragment.view.*
@@ -45,10 +45,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.map_fragment, container, false)
-//        model.text.observe(viewLifecycleOwner, Observer {
-////            //use it here
-////        })
-
         val button = root.find_button as Button
 
         button.setOnClickListener{
@@ -112,16 +108,19 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
+
+
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         MapsInitializer.initialize(context)
         map = googleMap
         googleMap.setOnMarkerClickListener(
             fun(marker: Marker?): Boolean {
-                Toast.makeText(context, marker?.title ?: "Null", Toast.LENGTH_LONG).show()
+                //Toast.makeText(context, marker?.title ?: "Null", Toast.LENGTH_LONG).show()
                 return false
             }
         )
+
         // При запуске карты ставим метки и прокладываем через них маршрут
         // TODO: передавать массив меток через intent
         // GPS HERE
@@ -151,51 +150,57 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             bounds.include(com.google.android.gms.maps.model.LatLng(places[i].lat, places[i].lng))
         }
         googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), width, width, 25))
-        val apiService = TomTomApiService.create()
+
 
         // Autocomplete
-        /*apiService.find("Москва макдоналдс").enqueue(object : Callback<PlaceHolder> {
-            override fun onResponse(
-                call: Call<PlaceHolder>,
-                response: Response<PlaceHolder>
-            ) {
-                if (response.body()?.results?.get(0) != null) {
-                    Toast.makeText(context, response.body()!!.results[0].address.streetName + " " + response.body()!!.results[0].address.localName, Toast.LENGTH_LONG).show()
-                }
-            }
-            override fun onFailure(call: Call<PlaceHolder>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })*/
+//        val apiService = TomTomApiService.create()
+//        apiService.find("disneyland", "en-US").enqueue(object : Callback<PlaceHolder> {
+//            override fun onResponse(
+//                call: Call<PlaceHolder>,
+//                response: Response<PlaceHolder>
+//            ) {
+//                if (response.body()?.results?.get(0) != null) {
+//                    Toast.makeText(context, response.body()!!.results[0].address.freeformAddress , Toast.LENGTH_LONG).show()
+//                    println(response.body()!!.results[0].address.freeformAddress )
+//                    for (item in response.body()!!.results) {
+//
+//                    }
+//                }
+//            }
+//            override fun onFailure(call: Call<PlaceHolder>, t: Throwable) { }
+//        })
 
-        for (i in 0 until places.size - 1) {
-            apiService.route(places[i].lat, places[i].lng, places[i + 1].lat, places[i + 1].lng)
-                .enqueue(object : Callback<RouteHolder> {
 
-                    override fun onResponse(
-                        call: Call<RouteHolder>,
-                        response: Response<RouteHolder>
-                    ) {
-                        val line = PolylineOptions()
-                        line.width(16f).color(R.color.colorPrimary)
-                        googleMap.addPolyline(line)
-                        if (response.body() != null) {
-                            for (i in response.body()!!.routes[0].legs[0].points) {
-                                val pt = com.google.android.gms.maps.model.LatLng(
-                                    i.latitude,
-                                    i.longitude
-                                )
-                                line.add(pt)
-
-                            }
-                        }
-                        map.addPolyline(line)
-                    }
-
-                    override fun onFailure(call: Call<RouteHolder>, t: Throwable) {
-                        TODO("Not yet implemented")
-                    }
-                })
-        }
+        //getting route here
+//        val apiService = TomTomApiService.create()
+//        for (i in 0 until places.size - 1) {
+//            apiService.route(places[i].lat, places[i].lng, places[i + 1].lat, places[i + 1].lng)
+//                .enqueue(object : Callback<RouteHolder> {
+//
+//                    override fun onResponse(
+//                        call: Call<RouteHolder>,
+//                        response: Response<RouteHolder>
+//                    ) {
+//                        val line = PolylineOptions()
+//                        line.width(16f).color(R.color.colorPrimary)
+//                        googleMap.addPolyline(line)
+//                        if (response.body() != null) {
+//                            for (i in response.body()!!.routes[0].legs[0].points) {
+//                                val pt = com.google.android.gms.maps.model.LatLng(
+//                                    i.latitude,
+//                                    i.longitude
+//                                )
+//                                line.add(pt)
+//
+//                            }
+//                        }
+//                        map.addPolyline(line)
+//                    }
+//
+//                    override fun onFailure(call: Call<RouteHolder>, t: Throwable) {
+//                        TODO("Not yet implemented")
+//                    }
+//                })
+//        }
     }
 }

@@ -44,15 +44,15 @@ class CalculatingPoints(var x: Double, var y: Double) {
             return CalculatingPoints(newX, newY)
         }
 
-        fun getSegmentCenter (point1 : Point, point2 : Point) : Point {
+        fun getSegmentCenter (point1 : PointString, point2 : PointString) : PointString {
             val doublePoint =  getCenterFromDegrees(arrayOf(
                 CalculatingPoints(point1.latitude.toDouble(), point1.longitude.toDouble()),
                 CalculatingPoints(point2.latitude.toDouble(), point2.longitude.toDouble())
                 ))
-            return Point(doublePoint.x.toString(), doublePoint.y.toString())
+            return PointString(doublePoint.x.toString(), doublePoint.y.toString())
         }
 
-        fun getDistance(point1 : Point, point2 : Point) : Double {
+        fun getDistance(point1 : PointString, point2 : PointString) : Double {
             return distVincenty(point1.latitude.toDouble(), point1.longitude.toDouble(), point2.latitude.toDouble(), point2.longitude.toDouble())
         }
 

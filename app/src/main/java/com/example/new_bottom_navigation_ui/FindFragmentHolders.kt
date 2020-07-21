@@ -1,6 +1,7 @@
 package com.example.new_bottom_navigation_ui
 
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
@@ -20,11 +21,32 @@ class HeaderViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
     }
 }
 
-class RouteViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
+class RouteViewHolder(private val root: View, private val manager : FragmentManager) : RecyclerView.ViewHolder(root) {
     private val button = root.set_point_button
 
-    fun onBindRoute(row: FindFragmentAdapter.Route) {
+    fun onBindRoute(row: FindFragmentAdapter.Route, position : Int) {
         button.text = row.label
+
+        button.setOnClickListener{
+            val supportFragmentManager = manager
+            val fragmentTag = SetRouteFragment::class.java.simpleName
+            MainActivity.routePosition = position
+
+            supportFragmentManager.commit {
+                supportFragmentManager.fragments.forEach { hide(it) }
+                val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
+                if (fragment != null) {
+                    show(fragment)
+                } else {
+                    val nextFragment = SetRouteFragment()
+                    add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)
+                }
+
+            }
+
+            val thisFragment: Fragment? = manager.findFragmentByTag(FindFragment.TAG)
+            if (thisFragment != null) manager.beginTransaction().remove(thisFragment).commit()
+        }
 
     }
 }

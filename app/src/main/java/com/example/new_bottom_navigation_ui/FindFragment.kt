@@ -1,21 +1,14 @@
 package com.example.new_bottom_navigation_ui
 
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.Drawable.createFromStream
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.new_bottom_navigation_ui.R
-import com.example.new_bottom_navigation_ui.SharedViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.find_fragment.*
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -23,8 +16,6 @@ import okhttp3.Request
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
-import java.io.InputStream
-import java.net.URL
 
 data class Restaurant(
     val name : String,
@@ -42,7 +33,7 @@ data class Restaurant(
     val establishmentType : ArrayList<String>
 )
 
-data class Point(var latitude: String = "", var longitude: String = "")
+data class PointString(var latitude: String = "", var longitude: String = "")
 
 class FindFragment : Fragment() {
 
@@ -66,8 +57,8 @@ class FindFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val findFragmentRows = mutableListOf<FindFragmentAdapter.FindFragmentRow>()
         //findFragmentRows.add(FindFragmentAdapter.Header("Route"))
-        findFragmentRows.add(FindFragmentAdapter.Route("From"))
-        findFragmentRows.add(FindFragmentAdapter.Route("To"))
+        findFragmentRows.add(FindFragmentAdapter.Route(MainActivity.fromAddress.address))
+        findFragmentRows.add(FindFragmentAdapter.Route(MainActivity.toAddress.address))
         //findFragmentRows.add(FindFragmentAdapter.Header("Cafe preferences"))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Establishment type"))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Cousin"))
@@ -86,6 +77,10 @@ class FindFragment : Fragment() {
         })
 
         submit_preferences_button.setOnClickListener {
+            val fragment: Fragment? =
+                requireActivity().supportFragmentManager.findFragmentByTag(ResultFragment.TAG)
+            if (fragment != null) requireActivity().supportFragmentManager.beginTransaction().remove(fragment)
+                .commit()
             sendRequest()
         }
 
@@ -128,15 +123,14 @@ class FindFragment : Fragment() {
         if (getEstablishmentTypeString.isNotEmpty()) establishmentType = "&restaurant_tagcategory=$getEstablishmentTypeString"
         else establishmentType = ""
 
-        val distance = "&distance=10"
-
+        val distance = "&distance=10"  //todo change accordingly
 
             //todo uncomment this stuff
-//        val centerPoint : Point = CalculatingPoints.getSegmentCenter(MainActivity.fromPoint, MainActivity.toPoint)
-//        val latitude = "&latitude=" + centerPoint.latitude
-//        val longitude = "&longitude=" + centerPoint.longitude
-        val latitude = "&latitude=12.91285"
-        val longitude = "&longitude=100.87808"
+        val centerPoint : PointString = CalculatingPoints.getSegmentCenter(MainActivity.fromAddress.coordinates, MainActivity.toAddress.coordinates)
+        val latitude = "&latitude=" + centerPoint.latitude
+        val longitude = "&longitude=" + centerPoint.longitude
+//        val latitude = "&latitude=12.91285"
+//        val longitude = "&longitude=100.87808"
 
         val url = "https://tripadvisor1.p.rapidapi.com/restaurants/list-by-latlng?limit=30&currency=EUR$prices$cousinType$distance$establishmentType$openNow$dietaryRestrictions&lunit=km&lang=en_US$rating$latitude$longitude"
 
