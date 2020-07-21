@@ -1,9 +1,16 @@
 package com.example.new_bottom_navigation_ui
 
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.widget.SearchView
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.google.gson.Gson
@@ -33,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         var foundRestaurants : ArrayList<Restaurant> = ArrayList()
         var fromPoint : Point = Point()
         var toPoint : Point = Point()
+        var mgr: LocationManager? = null
+        const val GPS_ACCESS_CODE = 455
     }
 
 
@@ -52,6 +61,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val permissionStatus =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (permissionStatus == PackageManager.PERMISSION_GRANTED) {
+            mgr = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        } else {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                GPS_ACCESS_CODE)
+        }
 
         nav_view.setOnNavigationItemSelectedListener {
             setFragment(it.itemId)
@@ -136,4 +155,18 @@ class MainActivity : AppCompatActivity() {
                 throw IllegalStateException()
         }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            GPS_ACCESS_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mgr = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                    recreate()
+                }
+            }
+        }
+    }
 }
