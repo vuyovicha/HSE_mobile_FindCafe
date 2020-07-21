@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -15,9 +15,14 @@ import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.android.synthetic.main.map_fragment.*
 import kotlinx.android.synthetic.main.map_fragment.view.*
+import kotlinx.android.synthetic.main.map_fragment_container.*
+
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
@@ -73,6 +78,30 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         map.onCreate(null)
         map.onResume()
         map.getMapAsync(this)
+
+
+        val llBottomSheet = bottom_sheet
+        val bottomSheetBehavior: BottomSheetBehavior<*> = BottomSheetBehavior.from(llBottomSheet)
+
+        val mloc = my_location
+
+        //bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        //bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        //bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        //bottomSheetBehavior.peekHeight = 340
+
+        //bottomSheetBehavior.isHideable = false
+
+        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {}
+            override fun onSlide(
+                bottomSheet: View,
+                slideOffset: Float
+            ) {
+                if (slideOffset in 0.0..0.5) mloc.animate().scaleX(1 - slideOffset*2).scaleY(1 - slideOffset*2).setDuration(0).start()
+            }
+        })
 
     }
 

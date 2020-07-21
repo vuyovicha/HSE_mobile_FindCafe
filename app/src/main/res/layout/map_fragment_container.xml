@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.new_bottom_navigation_ui.ButtonActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-<!-- подключение основного контента -->
-<include layout="@layout/map_fragment" />
+    <!-- подключение основного контента -->
+    <include layout="@layout/map_fragment" />
 
-<!-- подключение нижнего экрана -->
-<include layout="@layout/bottom_sheet" />
+    <!-- подключение нижнего экрана -->
+    <include layout="@layout/bottom_sheet" />
+
+
+    <ImageButton
+        android:id="@+id/my_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/circle_background"
+        android:src="@drawable/ic_my_location_black_36dp"
+        android:tint="#2196F3"
+        app:layout_anchor="@+id/bottom_sheet"
+        android:translationY="-24dp"
+        android:layout_gravity="top"
+        app:layout_anchorGravity="end|top" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
