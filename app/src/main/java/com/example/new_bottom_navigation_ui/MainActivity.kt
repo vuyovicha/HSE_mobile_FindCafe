@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         var establishmentTypeStates: BooleanArray = BooleanArray(0)
         var cousineStates: BooleanArray = BooleanArray(0)
         var pricesState = 0
-        var ratingState = 3.toFloat()
+        var ratingState = 0
         var openState = true
         var fromPointFlag = false
         var foundRestaurants : ArrayList<Restaurant> = ArrayList()

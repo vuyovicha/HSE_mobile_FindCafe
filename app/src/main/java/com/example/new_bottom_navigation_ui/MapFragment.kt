@@ -53,7 +53,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         button.setOnClickListener{
             val supportFragmentManager = requireActivity().supportFragmentManager
-//            fm.beginTransaction().show(R.id.nav_host_fragment, FindFragment()).addToBackStack(null).commit()
             val fragmentTag = FindFragment::class.java.simpleName
 
             supportFragmentManager.commit {

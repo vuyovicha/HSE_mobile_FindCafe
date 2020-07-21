@@ -119,36 +119,81 @@ class PreferenceListViewHolder(private val root: View, private val manager : Fra
 }
 
 class PreferencePriceViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
+    private val anyPriceButton = root.any_price
     private val minPriceButton = root.min_price
     private val mediumPriceButton = root.medium_price
     private val maxPriceButton = root.max_price
 
-
-    fun onBindPreferencePrice(row: FindFragmentAdapter.PreferencePrice) {
-        when (row.checkedButtonIndex) {
-            0 -> minPriceButton.isChecked = true
-            1 -> mediumPriceButton.isChecked = true
-            2 -> maxPriceButton.isChecked = true
+    fun onBindPreferencePrice(row: FindFragmentAdapter.PreferencePrice) { //do not need a row here
+        when (MainActivity.pricesState) {
+            0 -> anyPriceButton.isChecked = true
+            1 -> minPriceButton.isChecked = true
+            2 -> mediumPriceButton.isChecked = true
+            3 -> maxPriceButton.isChecked = true
         }
-        MainActivity.pricesState = row.checkedButtonIndex
+
+        anyPriceButton.setOnClickListener {
+            MainActivity.pricesState = 0
+        }
+
+        minPriceButton.setOnClickListener {
+            MainActivity.pricesState = 1
+        }
+
+        mediumPriceButton.setOnClickListener {
+            MainActivity.pricesState = 2
+        }
+
+        maxPriceButton.setOnClickListener {
+            MainActivity.pricesState = 3
+        }
     }
 }
 
 class PreferenceRatingViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
-    private val rating = root.reviewRating
+    private val anyRating = root.any_rating
+    private val threeRating = root.three_rating
+    private val fourRating = root.four_rating
+    private val fiveRating = root.five_rating
 
-    fun onBindPreferenceRating(row: FindFragmentAdapter.PreferenceRating) {
-        rating.rating = row.rating
-        MainActivity.ratingState = row.rating
+
+    fun onBindPreferenceRating(row: FindFragmentAdapter.PreferenceRating) { //todo do not need a row here
+        when (MainActivity.pricesState) {
+            0 -> anyRating.isChecked = true
+            1 -> threeRating.isChecked = true
+            2 -> fourRating.isChecked = true
+            3 -> fiveRating.isChecked = true
+        }
+
+        anyRating.setOnClickListener {
+            MainActivity.pricesState = 0
+        }
+
+        threeRating.setOnClickListener {
+            MainActivity.pricesState = 1
+        }
+
+        fourRating.setOnClickListener {
+            MainActivity.pricesState = 2
+        }
+
+        fiveRating.setOnClickListener {
+            MainActivity.pricesState = 3
+        }
+
     }
+
 }
 
 class PreferenceOpenNowViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
     private val checkbox = root.open_now_checkbox
 
-    fun onBindPreferenceOpenNow(row: FindFragmentAdapter.PreferenceOpenNow) {
-        checkbox.isChecked = row.isChecked
-        MainActivity.openState = row.isChecked
+    fun onBindPreferenceOpenNow(row: FindFragmentAdapter.PreferenceOpenNow) { //todo we do not need a "row" here
+        checkbox.isChecked = MainActivity.openState
+
+        checkbox.setOnClickListener{
+            MainActivity.openState = checkbox.isChecked
+        }
 
     }
 }
