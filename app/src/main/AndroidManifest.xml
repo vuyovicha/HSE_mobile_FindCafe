@@ -3,6 +3,7 @@
     package="com.example.new_bottom_navigation_ui">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
 
     <application

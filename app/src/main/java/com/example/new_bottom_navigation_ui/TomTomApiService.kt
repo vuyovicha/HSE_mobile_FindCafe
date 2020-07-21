@@ -1,7 +1,8 @@
-package com.hse.findcafe.ui.home
+package com.example.new_bottom_navigation_ui
 
-import android.database.Observable
+
 import com.hse.findcafe.PlaceHolder
+import com.hse.findcafe.ui.home.RouteHolder
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
