@@ -1,5 +1,6 @@
 package com.example.new_bottom_navigation_ui
 
+import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.restaurant_info_actions.view.r_reviews
@@ -16,7 +17,22 @@ class ActionsHolder(private val root: View) : RecyclerView.ViewHolder(root) {
 
     fun onBind(row: RestaurantInfoAdapter.Actions) {
         //header.text = row.label
+        if (row.website_url.isEmpty()) {
+            website.setColorFilter(Color.argb(255, 170,170,170))
+            website.setBackgroundResource(R.drawable.round_border_disable)
+        } else {
+            website.setOnClickListener {
 
+            }
+        }
+
+        reviews.setOnClickListener {
+
+        }
+
+        route.setOnClickListener {
+
+        }
     }
 }
 
