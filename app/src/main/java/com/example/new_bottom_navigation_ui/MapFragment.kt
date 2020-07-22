@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -63,7 +64,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 }
             }
             requireActivity().nav_view.menu.getItem(0).isChecked = true
-
         }
 
         root.my_location.setOnClickListener {
@@ -114,6 +114,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 //Toast.makeText(context, marker?.title ?: "Null", Toast.LENGTH_LONG).show()
                 return false
             }
+
         )
 
         // При запуске карты ставим метки и прокладываем через них маршрут

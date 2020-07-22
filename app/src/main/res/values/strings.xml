@@ -27,4 +27,7 @@
     <string name="min_price">$</string>
     <string name="medium_price">$$ - $$$</string>
     <string name="max_price">$$$$</string>
+    <string name="route_textt">Route</string>
+    <string name="website_text">Website</string>
+    <string name="call_text">Call</string>
 </resources>

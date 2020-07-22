@@ -16,6 +16,7 @@ import okhttp3.Request
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
+import kotlin.concurrent.thread
 
 data class Restaurant(
     val name : String,
@@ -30,7 +31,8 @@ data class Restaurant(
     val address : String,
     val cousin : ArrayList<String>,
     val dietaryRestrictions : ArrayList<String>,
-    val establishmentType : ArrayList<String>
+    val establishmentType : ArrayList<String>,
+    val addedMinutes : String
 )
 
 data class PointString(var latitude: String = "", var longitude: String = "")
@@ -97,6 +99,11 @@ class FindFragment : Fragment() {
         return list
     }
 
+    private fun getTime(point1 : CalculatingPoints, point2 : CalculatingPoints): Int? {
+        val apiService = TomTomApiService.create()
+        return apiService.route(point1.x, point1.y, point2.x, point2.y).execute().body()?.routes?.get(0)?.summary?.travelTimeInSeconds
+    }
+
     private fun sendRequest() {
         val prices : String
         if (MainActivity.pricesState > 0) prices = "&prices_restaurants=" + MainActivity.pricesOptions[MainActivity.pricesState - 1].value
@@ -150,47 +157,65 @@ class FindFragment : Fragment() {
                 jsonObject.remove("paging")
                 MainActivity.foundRestaurants = ArrayList()
                 val items = jsonObject.getJSONArray("data")
-                for (i in 1 until items.length()) {
-                    val item = JSONObject(items[i].toString())
-                    if (item.length() > 42) {
-                        //no photo available urls
-                        var smallPhoto = "https://lh3.googleusercontent.com/proxy/UCeMI56_IXsHAnNTahVtGH5AjI6y4kg6QA3LSXPvL8-3Qsj5-h_JrnPChuLReQSuQKRBA9c77ZlCrtcffgjSuY2il4_4KQ92Tpb9sG133prlqeg"
-                        var largePhoto = "https://lh3.googleusercontent.com/proxy/UCeMI56_IXsHAnNTahVtGH5AjI6y4kg6QA3LSXPvL8-3Qsj5-h_JrnPChuLReQSuQKRBA9c77ZlCrtcffgjSuY2il4_4KQ92Tpb9sG133prlqeg"
 
-                        if (item.has("photo")) {
-                            val photoObject = JSONObject(JSONObject(item.getString("photo")).getString("images"))
-                            smallPhoto = JSONObject(photoObject.getString("small")).getString("url")
-                            largePhoto = JSONObject(photoObject.getString("large")).getString("url")
-                        }
+                val fromPoint = CalculatingPoints(MainActivity.fromAddress.coordinates.latitude.toDouble(), MainActivity.fromAddress.coordinates.longitude.toDouble())
+                val toPoint = CalculatingPoints(MainActivity.toAddress.coordinates.latitude.toDouble(), MainActivity.toAddress.coordinates.longitude.toDouble())
 
-                        var rating = "-"
-                        if (item.has("rating")) {
-                            rating = item.getString("rating")
-                        }
+                thread(start = true) {
+                    for (i in 1 until items.length()) {
+                        val item = JSONObject(items[i].toString())
+                        if (item.length() > 42) {
+                            //no photo available urls
+                            var smallPhoto = "https://lh3.googleusercontent.com/proxy/UCeMI56_IXsHAnNTahVtGH5AjI6y4kg6QA3LSXPvL8-3Qsj5-h_JrnPChuLReQSuQKRBA9c77ZlCrtcffgjSuY2il4_4KQ92Tpb9sG133prlqeg"
+                            var largePhoto = "https://lh3.googleusercontent.com/proxy/UCeMI56_IXsHAnNTahVtGH5AjI6y4kg6QA3LSXPvL8-3Qsj5-h_JrnPChuLReQSuQKRBA9c77ZlCrtcffgjSuY2il4_4KQ92Tpb9sG133prlqeg"
 
-                        val cousinesList = getPreferenceList("cuisine", item)
-                        val dietaryRestrictionsList = getPreferenceList("dietary_restrictions", item)
-                        val establishmentTypeList = getPreferenceList("establishment_types", item)
-                        MainActivity.foundRestaurants.add(
-                            Restaurant(
-                                item.getString("name"),
-                                item.getString("latitude"),
-                                item.getString("longitude"),
-                                item.getString("location_string"),
-                                smallPhoto,
-                                largePhoto,
-                                rating,
-                                item.getString("price_level"),
-                                item.getString("description"),
-                                item.getString("address"),
-                                cousinesList,
-                                dietaryRestrictionsList,
-                                establishmentTypeList
+                            if (item.has("photo")) {
+                                val photoObject = JSONObject(JSONObject(item.getString("photo")).getString("images"))
+                                smallPhoto = JSONObject(photoObject.getString("small")).getString("url")
+                                largePhoto = JSONObject(photoObject.getString("large")).getString("url")
+                            }
+
+                            var rating = "-"
+                            if (item.has("rating")) {
+                                rating = item.getString("rating")
+                            }
+
+                            val cousinesList = getPreferenceList("cuisine", item)
+                            val dietaryRestrictionsList = getPreferenceList("dietary_restrictions", item)
+                            val establishmentTypeList = getPreferenceList("establishment_types", item)
+
+                            val restaurant = CalculatingPoints(item.getString("latitude").toDouble(), item.getString("longitude").toDouble())
+
+                            var minutes : String = "0"
+                            val fromRestaurant = getTime(fromPoint, restaurant)
+                            val restaurantTo = getTime(restaurant, toPoint)
+                            val fromTo = getTime(fromPoint, toPoint)
+                            if (fromRestaurant != null && restaurantTo != null && fromTo != null) {
+                                minutes = ((fromRestaurant + restaurantTo - fromTo) / 60).toString()
+                            }
+
+                            MainActivity.foundRestaurants.add(
+                                Restaurant(
+                                    item.getString("name"),
+                                    restaurant.x.toString(),
+                                    restaurant.y.toString(),
+                                    item.getString("location_string"),
+                                    smallPhoto,
+                                    largePhoto,
+                                    rating,
+                                    item.getString("price_level"),
+                                    item.getString("description"),
+                                    item.getString("address"),
+                                    cousinesList,
+                                    dietaryRestrictionsList,
+                                    establishmentTypeList,
+                                    minutes
+                                )
                             )
-                        )
+                        }
                     }
+                    goToResultFragment()
                 }
-                goToResultFragment()
             }
         })
     }
