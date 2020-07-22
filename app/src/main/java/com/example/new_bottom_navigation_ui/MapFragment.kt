@@ -106,7 +106,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         val adapter = RestaurantInfoAdapter(
             listOf(
-                RestaurantInfoAdapter.Actions("", "", "+7 777 777 77 77"),
+                RestaurantInfoAdapter.Actions("", "https://www.tripadvisor.ru/Restaurant_Review-g293919-d6106379-Reviews-Two_Lions_Restaurant_Pub-Pattaya_Chonburi_Province.html", "+7 777 777 77 77"),
                 RestaurantInfoAdapter.Line(),
                 RestaurantInfoAdapter.Open("Открыто", "Работает до 22:00"),
                 RestaurantInfoAdapter.SimpleInfo(R.drawable.ic_phone_black_24dp, "+777777777"),
