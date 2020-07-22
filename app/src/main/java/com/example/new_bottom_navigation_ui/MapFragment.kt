@@ -106,7 +106,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         val adapter = RestaurantInfoAdapter(
             listOf(
-                RestaurantInfoAdapter.Actions("", ""),
+                RestaurantInfoAdapter.Actions("", "", "+7 777 777 77 77"),
                 RestaurantInfoAdapter.Line(),
                 RestaurantInfoAdapter.Open("Открыто", "Работает до 22:00"),
                 RestaurantInfoAdapter.SimpleInfo(R.drawable.ic_phone_black_24dp, "+777777777"),

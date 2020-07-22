@@ -1,19 +1,22 @@
 package com.example.new_bottom_navigation_ui
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.View
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.restaurant_info_actions.view.r_reviews
-import kotlinx.android.synthetic.main.restaurant_info_actions.view.r_route
-import kotlinx.android.synthetic.main.restaurant_info_actions.view.r_website
+import kotlinx.android.synthetic.main.restaurant_info_actions.view.*
 import kotlinx.android.synthetic.main.restaurant_info_list.view.*
 import kotlinx.android.synthetic.main.restaurant_info_open.view.*
 import kotlinx.android.synthetic.main.restaurant_info_simple_info.view.*
+
 
 class ActionsHolder(private val root: View) : RecyclerView.ViewHolder(root) {
     private val route = root.r_route
     private val website = root.r_website
     private val reviews = root.r_reviews
+    private val call = root.r_call
 
     fun onBind(row: RestaurantInfoAdapter.Actions) {
         //header.text = row.label
@@ -22,16 +25,23 @@ class ActionsHolder(private val root: View) : RecyclerView.ViewHolder(root) {
             website.setBackgroundResource(R.drawable.round_border_disable)
         } else {
             website.setOnClickListener {
-
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(row.website_url))
+                root.context.startActivity(intent)
             }
         }
 
         reviews.setOnClickListener {
-
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(row.reviews_url))
+            root.context.startActivity(intent)
         }
 
         route.setOnClickListener {
 
+        }
+
+        call.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", row.phone, null))
+            root.context.startActivity(intent)
         }
     }
 }

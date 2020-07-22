@@ -21,7 +21,7 @@ class RestaurantInfoAdapter(val rows: List<RestaurantInfoRow>) : RecyclerView.Ad
     }
 
     interface RestaurantInfoRow
-    class Actions(val website_url: String, val reviews_url: String) : RestaurantInfoRow
+    class Actions(val website_url: String, val reviews_url: String, val phone: String) : RestaurantInfoRow
     class SimpleInfo(val icon: Int, val text: String) : RestaurantInfoRow
     class HeaderAndList(val icon: Int, val label: String, val list: Array<String>) : RestaurantInfoRow
     class Open(val is_open: String, val open_time: String) : RestaurantInfoRow
