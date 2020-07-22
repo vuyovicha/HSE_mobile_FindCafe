@@ -49,17 +49,19 @@ class ResultFragmentAdapter(private val man : FragmentManager) : RecyclerView.Ad
             val fromPoint = CalculatingPoints(MainActivity.fromAddress.coordinates.latitude.toDouble(), MainActivity.fromAddress.coordinates.longitude.toDouble())
             val toPoint = CalculatingPoints(MainActivity.toAddress.coordinates.latitude.toDouble(), MainActivity.toAddress.coordinates.longitude.toDouble())
             val restaurant = CalculatingPoints(restaurant.latitude.toDouble(), restaurant.longitude.toDouble())
-            var minutes : String = ""
             thread(start = true) {
+                var minutes : String = ""
+
                 val fromRestaurant = getDist(fromPoint, restaurant)
                 val restaurantTo = getDist(restaurant, toPoint)
                 val fromTo = getDist(fromPoint, toPoint)
                 if (fromRestaurant != null && restaurantTo != null && fromTo != null) {
                     minutes = ((fromRestaurant + restaurantTo - fromTo) / 60).toString()
                 }
+                addedTime.text = "+$minutes minutes added"
             }
 
-            addedTime.text = "+$minutes minutes added"
+
         }
 
         fun getDist(point1 : CalculatingPoints, point2 : CalculatingPoints): Int? {
