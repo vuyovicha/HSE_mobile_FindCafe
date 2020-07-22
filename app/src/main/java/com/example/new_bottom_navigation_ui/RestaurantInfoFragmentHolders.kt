@@ -65,8 +65,8 @@ class IconRowViewHolder(private val root: View) : RecyclerView.ViewHolder(root) 
                 icon.setImageDrawable(root.context.getDrawable(R.drawable.ic_baseline_restaurant_menu_24))
             OPEN_ROW ->{
                 icon.setImageDrawable(root.context.getDrawable(R.drawable.ic_baseline_access_time_24))
-                if (row.rowText.toBoolean()) text.text = "Closed"
-                else text.text = "Open"
+                if (row.rowText.toBoolean()) text.text = "Closed now"
+                else text.text = "Open now"
             }
 
         }
@@ -77,11 +77,13 @@ class IconRowViewHolder(private val root: View) : RecyclerView.ViewHolder(root) 
 class ActionsViewHolder(private val root: View, private val manager : FragmentManager) : RecyclerView.ViewHolder(root) {
     private val route = root.r_route
     private val website = root.r_website
+    private val websiteText = root.r_website_label
     private val call = root.r_call
+    private val callText = root.r_call_label
 
     fun onBindActions(row: RestaurantInfoFragmentAdapter.Actions) { //do not need a row here
         if (row.website.isEmpty()) {
-            website.setColorFilter(Color.argb(255, 170,170,170))
+            website.setColorFilter(Color.argb(255, 192,192,192))
             website.setBackgroundResource(R.drawable.round_border_disable)
         } else {
             website.setOnClickListener {
@@ -95,7 +97,7 @@ class ActionsViewHolder(private val root: View, private val manager : FragmentMa
         }
 
         if (row.website.isEmpty()) {
-            call.setColorFilter(Color.argb(255, 170,170,170))
+            call.setColorFilter(Color.argb(255, 192,192,192))
             call.setBackgroundResource(R.drawable.round_border_disable)
         } else {
             call.setOnClickListener {

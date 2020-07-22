@@ -61,10 +61,8 @@ class FindFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val findFragmentRows = mutableListOf<FindFragmentAdapter.FindFragmentRow>()
-        //findFragmentRows.add(FindFragmentAdapter.Header("Route"))
         findFragmentRows.add(FindFragmentAdapter.Route(MainActivity.fromAddress.address))
         findFragmentRows.add(FindFragmentAdapter.Route(MainActivity.toAddress.address))
-        //findFragmentRows.add(FindFragmentAdapter.Header("Cafe preferences"))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Establishment type"))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Cousin"))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Dietary restrictions"))

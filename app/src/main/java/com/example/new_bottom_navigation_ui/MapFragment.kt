@@ -111,7 +111,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         map = googleMap
         googleMap.setOnMarkerClickListener(
             fun(marker: Marker?): Boolean {
-                //Toast.makeText(context, marker?.title ?: "Null", Toast.LENGTH_LONG).show()
                 return false
             }
 

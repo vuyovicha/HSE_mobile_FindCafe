@@ -5,19 +5,25 @@
     android:id="@+id/restaurant_map_preview"
     android:layout_width="match_parent"
     android:layout_marginVertical="10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/find_background"
+    android:paddingBottom="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp">
 
     <TextView
         android:tag="name"
         android:id="@+id/r_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="14dp"
         android:layout_marginEnd="9dp"
+        android:layout_marginTop="10dp"
         android:text='Ресторан "Тимофеев"'
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/r_distance"
+        app:layout_constraintEnd_toStartOf="@+id/r_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,12 +48,13 @@
         style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="5dp"
         android:numStars="5"
         android:rating="2.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/r_est_type" />
+        app:layout_constraintTop_toBottomOf="@+id/r_name" />
 
 
     <!--адрес-->
@@ -56,13 +63,13 @@
         android:id="@+id/r_est_type"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:text="Студенческая ул., 35, Воронеж"
+        android:text="@string/restaurant_text"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/r_distance"
+        app:layout_constraintEnd_toStartOf="@+id/r_time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/r_name" />
+        app:layout_constraintTop_toBottomOf="@+id/r_ratingBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
