@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/find_background"
+    android:paddingBottom="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    >
+
+    <ImageButton
+        android:id="@+id/r_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_border"
+        android:tint="#3F51B5"
+        app:layout_constraintEnd_toStartOf="@+id/r_website"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_directions_black_24dp" />
+
+    <TextView
+        android:id="@+id/r_route_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Маршрут"
+        app:layout_constraintEnd_toEndOf="@+id/r_route"
+        app:layout_constraintStart_toStartOf="@+id/r_route"
+        app:layout_constraintTop_toBottomOf="@+id/r_route" />
+
+    <!--ссылка на веб-сайт-->
+    <ImageButton
+        android:tag="website"
+        android:id="@+id/r_website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_border"
+        android:tint="#3F51B5"
+        app:layout_constraintEnd_toEndOf="@id/r_reviews"
+        app:layout_constraintStart_toEndOf="@id/r_route"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_public_black_24dp" />
+
+    <!--ссылка на сайт с отзывами-->
+
+    <TextView
+        android:id="@+id/r_website_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Веб-сайт"
+        app:layout_constraintEnd_toEndOf="@+id/r_website"
+        app:layout_constraintStart_toStartOf="@+id/r_website"
+        app:layout_constraintTop_toBottomOf="@+id/r_website" />
+
+    <ImageButton
+        android:tag="wrb_url"
+        android:id="@+id/r_reviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_border"
+        android:tint="#3F51B5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/r_website"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_rate_review_black_24dp" />
+
+    <TextView
+        android:id="@+id/r_reviews_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Отзывы"
+        app:layout_constraintEnd_toEndOf="@+id/r_reviews"
+        app:layout_constraintStart_toStartOf="@+id/r_reviews"
+        app:layout_constraintTop_toBottomOf="@+id/r_reviews" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

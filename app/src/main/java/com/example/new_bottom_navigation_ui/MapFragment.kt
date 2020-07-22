@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.new_bottom_navigation_ui.ui.home.SharedViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,6 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet.*
+import kotlinx.android.synthetic.main.find_fragment.*
 import kotlinx.android.synthetic.main.map_fragment.*
 import kotlinx.android.synthetic.main.map_fragment.view.*
 import kotlinx.android.synthetic.main.map_fragment_container.*
@@ -66,7 +68,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         }
 
-
         return root
     }
 
@@ -102,6 +103,22 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 if (slideOffset in 0.0..0.5) mloc.animate().scaleX(1 - slideOffset*2).scaleY(1 - slideOffset*2).setDuration(0).start()
             }
         })
+
+        val adapter = RestaurantInfoAdapter(
+            listOf(
+                RestaurantInfoAdapter.Actions("", ""),
+                RestaurantInfoAdapter.Line(),
+                RestaurantInfoAdapter.Open("Открыто", "Работает до 22:00"),
+                RestaurantInfoAdapter.SimpleInfo(R.drawable.ic_phone_black_24dp, "+777777777"),
+                RestaurantInfoAdapter.SimpleInfo(R.drawable.ic_phone_black_24dp, "Price level: $$$$"),
+                RestaurantInfoAdapter.HeaderAndList(R.drawable.ic_category_black_24dp, "Establishment types", arrayOf("ресторан", "кафэ")),
+                RestaurantInfoAdapter.HeaderAndList(R.drawable.ic_restaurant_menu_black_24dp, "Cuisine", arrayOf("супы", "коктели", "десерты")),
+                RestaurantInfoAdapter.HeaderAndList(R.drawable.ic_restaurant_menu_black_24dp, "Dietary restrictions", arrayOf("вегетерианская пища"))
+            )
+        )
+        rrv.adapter = adapter
+        rrv.layoutManager = LinearLayoutManager(context)
+        //find_fragment_recycler.addItemDecoration(SpaceItemDecoration())
 
     }
 
