@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/restaurant_map_preview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_marginVertical="10dp"
+    android:layout_height="wrap_content">
 
     <TextView
         android:tag="name"
@@ -22,25 +23,17 @@
 
     <!--расстояние и время-->
     <TextView
-        android:id="@+id/r_distance"
+        android:id="@+id/r_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="13,5 км"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
-        android:id="@+id/r_distance_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="8dp"
-        android:text="1 час"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/r_distance" />
+
 
 
     <RatingBar
@@ -54,13 +47,13 @@
         android:numStars="5"
         android:rating="2.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/r_address" />
+        app:layout_constraintTop_toBottomOf="@+id/r_est_type" />
 
 
     <!--адрес-->
     <TextView
         android:tag="address"
-        android:id="@+id/r_address"
+        android:id="@+id/r_est_type"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -68,7 +61,7 @@
         android:layout_marginEnd="8dp"
         android:text="Студенческая ул., 35, Воронеж"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/r_distance_time"
+        app:layout_constraintEnd_toStartOf="@+id/r_distance"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/r_name" />
 

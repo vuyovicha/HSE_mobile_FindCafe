@@ -19,20 +19,23 @@ import java.io.IOException
 import kotlin.concurrent.thread
 
 data class Restaurant(
-    val name : String,
-    val latitude : String,
-    val longitude : String,
-    val locationString : String,
-    val smallPhotoUrl : String,
-    val largePhotoUrl : String,
-    val rating : String,
-    val priceLevel : String,
-    val description : String,
-    val address : String,
-    val cousin : ArrayList<String>,
-    val dietaryRestrictions : ArrayList<String>,
-    val establishmentType : ArrayList<String>,
-    val addedMinutes : String
+    val name : String = "",
+    val latitude : String = "",
+    val longitude : String = "",
+    val locationString : String = "",
+    val smallPhotoUrl : String = "",
+    val largePhotoUrl : String = "",
+    val rating : String = "",
+    val priceLevel : String = "",
+    val description : String = "",
+    val address : String = "",
+    val cousin : ArrayList<String> = ArrayList(),
+    val dietaryRestrictions : ArrayList<String> = ArrayList(),
+    val establishmentType : ArrayList<String> = ArrayList(),
+    val addedMinutes : String = "",
+    val website : String = "",
+    val call : String = "",
+    val isClosed : Boolean = false
 )
 
 data class PointString(var latitude: String = "", var longitude: String = "")
@@ -194,6 +197,15 @@ class FindFragment : Fragment() {
                                 minutes = ((fromRestaurant + restaurantTo - fromTo) / 60).toString()
                             }
 
+                            var website = ""
+                            var call = ""
+                            if (item.has("web_url")) {
+                                website = item.getString("web_url")
+                            }
+                            if (item.has("phone")) {
+                                call = item.getString("phone")
+                            }
+
                             MainActivity.foundRestaurants.add(
                                 Restaurant(
                                     item.getString("name"),
@@ -209,7 +221,10 @@ class FindFragment : Fragment() {
                                     cousinesList,
                                     dietaryRestrictionsList,
                                     establishmentTypeList,
-                                    minutes
+                                    minutes,
+                                    website,
+                                    call,
+                                    item.getBoolean("is_closed")
                                 )
                             )
                         }
