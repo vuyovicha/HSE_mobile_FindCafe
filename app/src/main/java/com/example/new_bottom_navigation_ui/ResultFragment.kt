@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.maps.model.LatLng
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.find_fragment.*
@@ -38,6 +40,32 @@ class ResultFragment : Fragment() {
         adapter.replaceItems(MainActivity.foundRestaurants)
         find_fragment_recycler.adapter = adapter
         find_fragment_recycler.layoutManager = LinearLayoutManager(context)
+
+        seeResultsOnMapButton.setOnClickListener{
+            MainActivity.placesToShow = ArrayList()
+            for (item in MainActivity.foundRestaurants) {
+                MainActivity.placesToShow.add(LatLng(item.latitude.toDouble(), item.longitude.toDouble()))
+            }
+
+            val supportFragmentManager = requireActivity().supportFragmentManager
+            val thisFragment: Fragment? = supportFragmentManager.findFragmentByTag(MapFragment.TAG)
+            if (thisFragment != null) supportFragmentManager.beginTransaction().remove(thisFragment).commit()
+
+            val fragmentTag = MapFragment::class.java.simpleName
+
+            supportFragmentManager.commit {
+                supportFragmentManager.fragments.forEach { hide(it) }
+                val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
+                if (fragment != null) {
+                    show(fragment)
+                } else {
+                    val nextFragment = MapFragment()
+                    add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)
+
+                }
+            }
+            requireActivity().nav_view.menu.getItem(1).isChecked = true
+        }
 
     }
     

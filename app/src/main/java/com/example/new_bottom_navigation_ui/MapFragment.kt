@@ -32,10 +32,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private val model: SharedViewModel by activityViewModels()
-    private val places: MutableList<com.google.maps.model.LatLng> =
-        ArrayList()
     private var mapsApiKey: String? = null
     private var width = 0
+    private var places: MutableList<com.google.maps.model.LatLng> = ArrayList()
 
     private lateinit var map: GoogleMap
 
@@ -46,6 +45,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         val root = inflater.inflate(R.layout.map_fragment, container, false)
         val button = root.find_button as Button
+        places = MainActivity.placesToShow
 
         button.setOnClickListener{
             val supportFragmentManager = requireActivity().supportFragmentManager
@@ -95,11 +95,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        places.add(LatLng(55.754724, 37.621380))
-        places.add(LatLng(55.760133, 37.618697))
-        places.add(LatLng(55.764753, 37.591313))
-        places.add(LatLng(55.728466, 37.604155))
         mapsApiKey = "AIzaSyDAIoGVJga6e4IzDwV-ICbZcVwkrRV57OQ"
         width = resources.displayMetrics.widthPixels
 
@@ -131,9 +126,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                     com.google.android.gms.maps.model.LatLng(location.latitude, location.longitude))
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                 .title = "I am here"
-
-            //places.add(LatLng(location.latitude, location.longitude))
-            //Toast.makeText(this, location.longitude.toString(), Toast.LENGTH_LONG).show()
         }
 
         val markers = arrayOfNulls<MarkerOptions>(places.size)
@@ -149,26 +141,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             googleMap.addMarker(markers[i])
             bounds.include(com.google.android.gms.maps.model.LatLng(places[i].lat, places[i].lng))
         }
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), width, width, 25))
+        if (places.isNotEmpty()) googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), width, width, 25))
 
-
-        // Autocomplete
-//        val apiService = TomTomApiService.create()
-//        apiService.find("disneyland", "en-US").enqueue(object : Callback<PlaceHolder> {
-//            override fun onResponse(
-//                call: Call<PlaceHolder>,
-//                response: Response<PlaceHolder>
-//            ) {
-//                if (response.body()?.results?.get(0) != null) {
-//                    Toast.makeText(context, response.body()!!.results[0].address.freeformAddress , Toast.LENGTH_LONG).show()
-//                    println(response.body()!!.results[0].address.freeformAddress )
-//                    for (item in response.body()!!.results) {
-//
-//                    }
-//                }
-//            }
-//            override fun onFailure(call: Call<PlaceHolder>, t: Throwable) { }
-//        })
 
 
         //getting route here

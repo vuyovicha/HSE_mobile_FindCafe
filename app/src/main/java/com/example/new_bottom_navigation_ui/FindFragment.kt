@@ -129,8 +129,6 @@ class FindFragment : Fragment() {
         val centerPoint : PointString = CalculatingPoints.getSegmentCenter(MainActivity.fromAddress.coordinates, MainActivity.toAddress.coordinates)
         val latitude = "&latitude=" + centerPoint.latitude
         val longitude = "&longitude=" + centerPoint.longitude
-//        val latitude = "&latitude=12.91285"
-//        val longitude = "&longitude=100.87808"
 
         val url = "https://tripadvisor1.p.rapidapi.com/restaurants/list-by-latlng?limit=30&currency=EUR$prices$cousinType$distance$establishmentType$openNow$dietaryRestrictions&lunit=km&lang=en_US$rating$latitude$longitude"
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.set_route_fragment.*
 import retrofit2.Call
@@ -59,6 +60,13 @@ class SetRouteFragment : Fragment() {
 //            }
 //            false
 //        })
+        set_route_fragment_recycler.addItemDecoration(
+            DividerItemDecoration(
+                set_route_fragment_recycler.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
 
         search_location.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {

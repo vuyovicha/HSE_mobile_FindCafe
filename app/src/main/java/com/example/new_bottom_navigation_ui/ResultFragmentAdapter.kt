@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.result_fragment_row.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.concurrent.thread
 
 class ResultFragmentAdapter(private val man : FragmentManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -43,18 +44,28 @@ class ResultFragmentAdapter(private val man : FragmentManager) : RecyclerView.Ad
         fun onBindResult(restaurant : Restaurant) {
             Picasso.get().load(restaurant.smallPhotoUrl).into(image)
             name.text = restaurant.name
-            location.text = restaurant.locationString
+            location.text = restaurant.address //todo or location string?
 
             val fromPoint = CalculatingPoints(MainActivity.fromAddress.coordinates.latitude.toDouble(), MainActivity.fromAddress.coordinates.longitude.toDouble())
             val toPoint = CalculatingPoints(MainActivity.toAddress.coordinates.latitude.toDouble(), MainActivity.toAddress.coordinates.longitude.toDouble())
             val restaurant = CalculatingPoints(restaurant.latitude.toDouble(), restaurant.longitude.toDouble())
-            val fromRestaurant = getAddedTime(fromPoint, restaurant)
-            val restaurantTo = getAddedTime(restaurant, toPoint)
-            val fromTo = getAddedTime(fromPoint, toPoint)
-            val minutes = ((fromRestaurant + restaurantTo - fromTo) / 60).toString() //todo calculate minutes here
+            var minutes : String = ""
+            thread(start = true) {
+                val fromRestaurant = getDist(fromPoint, restaurant)
+                val restaurantTo = getDist(restaurant, toPoint)
+                val fromTo = getDist(fromPoint, toPoint)
+                if (fromRestaurant != null && restaurantTo != null && fromTo != null) {
+                    minutes = ((fromRestaurant + restaurantTo - fromTo) / 60).toString()
+                }
+            }
+
             addedTime.text = "+$minutes minutes added"
         }
 
+        fun getDist(point1 : CalculatingPoints, point2 : CalculatingPoints): Int? {
+            val apiService = TomTomApiService.create()
+            return apiService.route(point1.x, point1.y, point2.x, point2.y).execute().body()?.routes?.get(0)?.summary?.travelTimeInSeconds
+        }
 
         //todo this function doesn't return proper time
         fun getAddedTime(point1 : CalculatingPoints, point2 : CalculatingPoints) : Int {
@@ -67,7 +78,7 @@ class ResultFragmentAdapter(private val man : FragmentManager) : RecyclerView.Ad
                         response: Response<RouteHolder>
                     ) {
                         if (response.body() != null) {
-                            seconds = response.body()!!.routes[0].summary.travelTimeInSeconds
+                            seconds =  response.body()!!.routes[0].summary.travelTimeInSeconds
                         }
                     }
 

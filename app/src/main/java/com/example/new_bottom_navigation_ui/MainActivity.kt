@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         const val GPS_ACCESS_CODE = 455
         var fromAddress = DisplayAddress()
         var toAddress = DisplayAddress()
+        var placesToShow: MutableList<com.google.maps.model.LatLng> = ArrayList()
     }
 
 
