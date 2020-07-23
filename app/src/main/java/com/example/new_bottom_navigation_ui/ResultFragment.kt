@@ -42,20 +42,8 @@ class ResultFragment : Fragment() {
         find_fragment_recycler.layoutManager = LinearLayoutManager(context)
 
         seeResultsOnMapButton.setOnClickListener{
-
             MainActivity.getRoute = false
-//            MainActivity.placesToShow = ArrayList()
-//            for (item in MainActivity.foundRestaurants) {
-//                MainActivity.placesToShow.add(LatLng(item.latitude.toDouble(), item.longitude.toDouble()))
-//            }
-
             val supportFragmentManager = requireActivity().supportFragmentManager
-//            val thisFragment: Fragment? = supportFragmentManager.findFragmentByTag(MapFragment.TAG)
-//            if (thisFragment != null) {
-//                supportFragmentManager.beginTransaction().remove(thisFragment).commit()
-//            }
-
-
             val fragmentTag = MapFragment::class.java.simpleName
 
             supportFragmentManager.commit {

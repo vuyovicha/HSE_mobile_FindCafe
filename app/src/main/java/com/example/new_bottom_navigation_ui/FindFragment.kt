@@ -85,6 +85,7 @@ class FindFragment : Fragment() {
                 requireActivity().supportFragmentManager.findFragmentByTag(ResultFragment.TAG)
             if (fragment != null) requireActivity().supportFragmentManager.beginTransaction().remove(fragment)
                 .commit()
+            goToLoadingFragment()
             sendRequest()
         }
 
@@ -164,7 +165,6 @@ class FindFragment : Fragment() {
                 val toPoint = CalculatingPoints(MainActivity.toAddress.coordinates.latitude.toDouble(), MainActivity.toAddress.coordinates.longitude.toDouble())
 
                 thread(start = true) {
-                    goToLoadingFragment()
                     for (i in 1 until items.length()) {
                         val item = JSONObject(items[i].toString())
                         if (item.length() > 42) {
@@ -229,6 +229,13 @@ class FindFragment : Fragment() {
                             )
                         }
                     }
+                    MainActivity.foundRestaurants = ArrayList(MainActivity.foundRestaurants.sortedWith(Comparator<Restaurant> { p1, p2 ->
+                        when {
+                            p1.addedMinutes.toInt() > p2.addedMinutes.toInt() -> 1
+                            p1.addedMinutes.toInt() == p2.addedMinutes.toInt() -> 0
+                            else -> -1
+                        }
+                    }))
                     MainActivity.placesToShow = ArrayList()
                     for (item in MainActivity.foundRestaurants) {
                         MainActivity.placesToShow.add(LatLng(item.latitude.toDouble(), item.longitude.toDouble()))
