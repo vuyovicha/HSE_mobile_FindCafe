@@ -5,9 +5,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.restaurant_info_fragment_actions.view.*
 import kotlinx.android.synthetic.main.restaurant_info_fragment_icon_row.view.*
 import kotlinx.android.synthetic.main.restaurant_info_fragment_image.view.*
@@ -93,7 +96,19 @@ class ActionsViewHolder(private val root: View, private val manager : FragmentMa
         }
 
         route.setOnClickListener {
+            MainActivity.getRoute = true
+            val supportFragmentManager = manager
+            val fragmentTag = MapFragment::class.java.simpleName
 
+            supportFragmentManager.commit {
+                val thisFragment: Fragment? = supportFragmentManager.findFragmentByTag(fragmentTag)
+                supportFragmentManager.fragments.forEach { hide(it) }
+                if (thisFragment != null) {
+                    remove(thisFragment)
+                    val nextFragment = MapFragment()
+                    add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName) //todo
+                }
+            }
         }
 
         if (row.website.isEmpty()) {

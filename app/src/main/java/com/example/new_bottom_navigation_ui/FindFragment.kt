@@ -64,7 +64,7 @@ class FindFragment : Fragment() {
         findFragmentRows.add(FindFragmentAdapter.Route(MainActivity.fromAddress.address))
         findFragmentRows.add(FindFragmentAdapter.Route(MainActivity.toAddress.address))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Establishment type"))
-        findFragmentRows.add(FindFragmentAdapter.PreferenceList("Cousin"))
+        findFragmentRows.add(FindFragmentAdapter.PreferenceList("Cuisine"))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Dietary restrictions"))
         findFragmentRows.add(FindFragmentAdapter.PreferencePrice(MainActivity.pricesState))
         findFragmentRows.add(FindFragmentAdapter.PreferenceRating(MainActivity.ratingState))

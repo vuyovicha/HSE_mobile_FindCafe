@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         var toAddress = DisplayAddress()
         var placesToShow: MutableList<com.google.maps.model.LatLng> = ArrayList()
         var restaurantGetInfo : Restaurant = Restaurant()
+        var getRoute = false
     }
 
 

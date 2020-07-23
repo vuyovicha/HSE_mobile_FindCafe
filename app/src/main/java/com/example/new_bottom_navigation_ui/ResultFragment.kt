@@ -43,25 +43,27 @@ class ResultFragment : Fragment() {
 
         seeResultsOnMapButton.setOnClickListener{
             MainActivity.placesToShow = ArrayList()
+            MainActivity.getRoute = false
             for (item in MainActivity.foundRestaurants) {
                 MainActivity.placesToShow.add(LatLng(item.latitude.toDouble(), item.longitude.toDouble()))
             }
 
             val supportFragmentManager = requireActivity().supportFragmentManager
-            val thisFragment: Fragment? = supportFragmentManager.findFragmentByTag(MapFragment.TAG)
-            if (thisFragment != null) supportFragmentManager.beginTransaction().remove(thisFragment).commit()
+//            val thisFragment: Fragment? = supportFragmentManager.findFragmentByTag(MapFragment.TAG)
+//            if (thisFragment != null) {
+//                supportFragmentManager.beginTransaction().remove(thisFragment).commit()
+//            }
+
 
             val fragmentTag = MapFragment::class.java.simpleName
 
             supportFragmentManager.commit {
+                val thisFragment: Fragment? = supportFragmentManager.findFragmentByTag(fragmentTag)
                 supportFragmentManager.fragments.forEach { hide(it) }
-                val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
-                if (fragment != null) {
-                    show(fragment)
-                } else {
+                if (thisFragment != null) {
+                    remove(thisFragment)
                     val nextFragment = MapFragment()
-                    add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)
-
+                    add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName) //todo
                 }
             }
             requireActivity().nav_view.menu.getItem(1).isChecked = true
