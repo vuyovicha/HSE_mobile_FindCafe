@@ -21,13 +21,14 @@ class SetPreferencesSearchFragmentAdapter (private var setPreferencesFragmentRow
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return SetPreferencesViewHolder(
+        return SetSearchPreferencesViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.set_preferences_row, parent, false))
+                .inflate(R.layout.set_preferences_row, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as SetPreferencesViewHolder).onBindSetPreferencesViewHolder(setPreferencesFragmentFilterRows[position])
+        (holder as SetSearchPreferencesViewHolder).onBindSetSearchPreferencesViewHolder(setPreferencesFragmentFilterRows[position])
     }
 
     override fun getItemCount() = setPreferencesFragmentFilterRows.count()
@@ -62,10 +63,10 @@ class SetPreferencesSearchFragmentAdapter (private var setPreferencesFragmentRow
         }
     }
 
-    inner class SetPreferencesViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
+    inner class SetSearchPreferencesViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
         private val checkBox: CheckBox = root.checkBox
 
-        fun onBindSetPreferencesViewHolder(option : RestaurantCriterionsIndexed) {
+        fun onBindSetSearchPreferencesViewHolder(option : RestaurantCriterionsIndexed) {
             checkBox.text = option.label
             checkBox.isChecked =  MainActivity.cousineStates[option.index]
             checkBox.setOnClickListener {

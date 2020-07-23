@@ -115,7 +115,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mapsApiKey = "AIzaSyDAIoGVJga6e4IzDwV-ICbZcVwkrRV57OQ"
         width = resources.displayMetrics.widthPixels
         requireActivity().nav_view.menu.getItem(1).isChecked = true
 
@@ -160,9 +159,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 locationMarkerIcon = getBitmapFromVector(requireContext(), R.drawable.ic_baseline_location_on_24,
                     ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark))
             }
-//            var icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_baseline_restaurant_menu_24)
-//            if (i == 0) icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_baseline_my_location_24)
-//            if (i == places.count() - 1) icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_baseline_location_on_24)
             markers[i] = MarkerOptions()
                 .position(
                     com.google.android.gms.maps.model.LatLng(
@@ -176,7 +172,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             bounds.include(com.google.android.gms.maps.model.LatLng(places[i].lat, places[i].lng))
         }
         if (places.isNotEmpty()) googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), width, width, 25))
-
 
 
         //getting route here
@@ -214,13 +209,14 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     }
 
-    fun getBitmapFromVector(
+    //from drawable to bitmap (setting marker icon)
+    private fun getBitmapFromVector(
         context: Context,
         @DrawableRes vectorResourceId: Int,
         @ColorInt tintColor: Int
     ): BitmapDescriptor? {
         val vectorDrawable = ResourcesCompat.getDrawable(
-            context.getResources(), vectorResourceId, null
+            context.resources, vectorResourceId, null
         )
         if (vectorDrawable == null) {
             Log.e(TAG, "Requested vector resource was not found")
@@ -231,7 +227,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
         )
         val canvas = Canvas(bitmap)
-        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())
+        vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
         DrawableCompat.setTint(vectorDrawable, tintColor)
         vectorDrawable.draw(canvas)
         return BitmapDescriptorFactory.fromBitmap(bitmap)

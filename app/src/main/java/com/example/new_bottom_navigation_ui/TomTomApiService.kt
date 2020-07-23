@@ -17,13 +17,13 @@ import retrofit2.http.Query
 
 interface TomTomApiService {
 
-    @GET("https://api.tomtom.com/routing/1/calculateRoute/{lat1},{lng1}:{lat2},{lng2}/json?key=mvGcs6aeG2AtpsnUn1yr4hdNBUB7gVkG&travelMode=bicycle")
+    @GET("https://api.tomtom.com/routing/1/calculateRoute/{lat1},{lng1}:{lat2},{lng2}/json?key=QmTNZa98qz0dAJ8VZkP9YVIrAAxls303&travelMode=bicycle")
     fun route(@Path("lat1") lat1: Double,
                @Path("lng1") lng1: Double,
                @Path("lat2") lat2: Double,
                @Path("lng2") lng2: Double): Call<RouteHolder>
 
-    @GET("https://api.tomtom.com/search/2/search/{request}.json/?key=mvGcs6aeG2AtpsnUn1yr4hdNBUB7gVkG")
+    @GET("https://api.tomtom.com/search/2/search/{request}.json/?key=QmTNZa98qz0dAJ8VZkP9YVIrAAxls303")
     fun find(@Path("request") request: String, @Query("language") language: String): Call<PlaceHolder>
 
     companion object Factory {

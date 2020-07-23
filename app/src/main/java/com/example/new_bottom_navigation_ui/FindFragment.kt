@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.maps.model.LatLng
 import kotlinx.android.synthetic.main.find_fragment.*
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -64,7 +65,7 @@ class FindFragment : Fragment() {
         findFragmentRows.add(FindFragmentAdapter.Route(MainActivity.fromAddress.address))
         findFragmentRows.add(FindFragmentAdapter.Route(MainActivity.toAddress.address))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Establishment type"))
-        findFragmentRows.add(FindFragmentAdapter.PreferenceList("Cuisine"))
+        findFragmentRows.add(FindFragmentAdapter.PreferenceList("Cousin"))
         findFragmentRows.add(FindFragmentAdapter.PreferenceList("Dietary restrictions"))
         findFragmentRows.add(FindFragmentAdapter.PreferencePrice(MainActivity.pricesState))
         findFragmentRows.add(FindFragmentAdapter.PreferenceRating(MainActivity.ratingState))
@@ -163,6 +164,7 @@ class FindFragment : Fragment() {
                 val toPoint = CalculatingPoints(MainActivity.toAddress.coordinates.latitude.toDouble(), MainActivity.toAddress.coordinates.longitude.toDouble())
 
                 thread(start = true) {
+                    goToLoadingFragment()
                     for (i in 1 until items.length()) {
                         val item = JSONObject(items[i].toString())
                         if (item.length() > 42) {
@@ -227,6 +229,10 @@ class FindFragment : Fragment() {
                             )
                         }
                     }
+                    MainActivity.placesToShow = ArrayList()
+                    for (item in MainActivity.foundRestaurants) {
+                        MainActivity.placesToShow.add(LatLng(item.latitude.toDouble(), item.longitude.toDouble()))
+                    }
                     goToResultFragment()
                 }
             }
@@ -245,6 +251,23 @@ class FindFragment : Fragment() {
                 show(fragment)
             } else {
                 val nextFragment = ResultFragment()
+                add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)
+
+            }
+        }
+    }
+
+    private fun goToLoadingFragment() {
+        val supportFragmentManager = requireActivity().supportFragmentManager
+        val fragmentTag = LoadingFragment::class.java.simpleName
+
+        supportFragmentManager.commit {
+            supportFragmentManager.fragments.forEach { hide(it) }
+            val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
+            if (fragment != null) {
+                show(fragment)
+            } else {
+                val nextFragment = LoadingFragment()
                 add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)
 
             }
