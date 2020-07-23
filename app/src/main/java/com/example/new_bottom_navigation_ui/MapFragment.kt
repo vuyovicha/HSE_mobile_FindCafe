@@ -15,6 +15,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -86,6 +87,15 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             requireActivity().nav_view.menu.getItem(0).isChecked = true
         }
 
+        root.restaurant_name.isInvisible = !MainActivity.getRoute
+        val name = MainActivity.restaurantGetInfo.name
+        val minutes = MainActivity.restaurantGetInfo.addedMinutes
+        root.restaurant_name.text = "$name (+$minutes mins)"
+        root.restaurant_name.setOnClickListener {
+            goToRestaurantInfo()
+        }
+
+
         root.my_zoom_in.setOnClickListener{
             if (map != null) map.moveCamera(CameraUpdateFactory.zoomIn())
         }
@@ -96,7 +106,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         root.my_location.setOnClickListener {
             if (map != null) {
-                //map.moveCamera(CameraUpdateFactory.zoomIn())
                 val bounds = LatLngBounds.builder()
                 for (i in places.indices) {
                     bounds.include(
@@ -132,6 +141,21 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         map_view.onResume()
     }
 
+    private fun goToRestaurantInfo() {
+        val fragmentTag = RestaurantInfoFragment::class.java.simpleName
+        val supportFragmentManager = requireActivity().supportFragmentManager
+        supportFragmentManager.commit {
+            supportFragmentManager.fragments.forEach { hide(it) }
+            val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
+            if (fragment != null) {
+                show(fragment)
+            } else {
+                val nextFragment = RestaurantInfoFragment()
+                add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName)
+
+            }
+        }
+    }
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
@@ -140,12 +164,15 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         googleMap.setOnMarkerClickListener(
             fun(marker: Marker?): Boolean {
+                if (marker?.tag != null) {
+                    MainActivity.restaurantGetInfo = marker!!.tag as Restaurant
+                    goToRestaurantInfo()
+                }
                 return false
             }
 
         )
 
-        // При запуске карты ставим метки и прокладываем через них маршрут
         // GPS HERE
 //        val location = MainActivity.mgr?.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
 //        if (location != null) {
@@ -168,7 +195,20 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 locationMarkerIcon = getBitmapFromVector(requireContext(), R.drawable.ic_baseline_location_on_24,
                     ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark))
             }
-            markers[i] = MarkerOptions()
+
+//            markers[i] = MarkerOptions()
+//                .position(
+//                    com.google.android.gms.maps.model.LatLng(
+//                        places[i].lat,
+//                        places[i].lng
+//                    )
+//                )
+//                .icon(locationMarkerIcon)
+//                .anchor(0.5f, 1f)
+//
+//            googleMap.addMarker(markers[i])
+
+            val current_marker =  googleMap.addMarker(MarkerOptions()
                 .position(
                     com.google.android.gms.maps.model.LatLng(
                         places[i].lat,
@@ -176,8 +216,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                     )
                 )
                 .icon(locationMarkerIcon)
-                .anchor(0.5f, 1f)
-            googleMap.addMarker(markers[i])
+                .anchor(0.5f, 1f))
+
+            if (i != 0 && i != places.count() - 1) current_marker.tag = MainActivity.foundRestaurants[i - 1]
+
             bounds.include(com.google.android.gms.maps.model.LatLng(places[i].lat, places[i].lng))
         }
         if (places.isNotEmpty()) googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), width, width, 25))

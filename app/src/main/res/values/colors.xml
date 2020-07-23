@@ -6,4 +6,5 @@
     <color name="searchViewColor">#CFE1DF</color>
     <color name="colorAccentBright">#99BDBA</color>
     <color name="colorRedMarker">#E81909</color>
+    <color name="colorWhite">#D3FFFFFF</color>
 </resources>
