@@ -46,7 +46,9 @@ class ResultFragmentAdapter(private val man : FragmentManager) : RecyclerView.Ad
             Picasso.get().load(restaurant.smallPhotoUrl).into(image)
             name.text = restaurant.name
             location.text = restaurant.address //todo or location string?
-            addedTime.text = "+${restaurant.addedMinutes} minutes"
+            var minutes = "minutes"
+            if (restaurant.addedMinutes == "1") minutes = "minute"
+            addedTime.text = "+${restaurant.addedMinutes} $minutes"
 
             root.setOnClickListener {
                 MainActivity.restaurantGetInfo = restaurant

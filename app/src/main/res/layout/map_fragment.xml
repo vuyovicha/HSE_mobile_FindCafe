@@ -25,6 +25,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageButton
+        android:id="@+id/my_zoom_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/circle_background"
+        android:tint="#2196F3"
+        android:src="@drawable/ic_baseline_zoom_out_36"
+        app:layout_constraintBottom_toTopOf="@id/my_location"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/my_zoom_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/circle_background"
+        android:tint="#2196F3"
+        android:src="@drawable/ic_baseline_zoom_in_24"
+        app:layout_constraintBottom_toTopOf="@id/my_zoom_out"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
         android:id="@+id/find_button"
         android:layout_width="0dp"

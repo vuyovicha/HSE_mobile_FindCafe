@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
@@ -81,12 +82,17 @@ class FindFragment : Fragment() {
         })
 
         submit_preferences_button.setOnClickListener {
-            val fragment: Fragment? =
-                requireActivity().supportFragmentManager.findFragmentByTag(ResultFragment.TAG)
-            if (fragment != null) requireActivity().supportFragmentManager.beginTransaction().remove(fragment)
-                .commit()
-            goToLoadingFragment()
-            sendRequest()
+            if (!(MainActivity.fromAddress.address == "" || MainActivity.toAddress.address == "")) {
+                val fragment: Fragment? =
+                    requireActivity().supportFragmentManager.findFragmentByTag(ResultFragment.TAG)
+                if (fragment != null) requireActivity().supportFragmentManager.beginTransaction().remove(fragment)
+                    .commit()
+                goToLoadingFragment()
+                sendRequest()
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.set_route_warning), Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }

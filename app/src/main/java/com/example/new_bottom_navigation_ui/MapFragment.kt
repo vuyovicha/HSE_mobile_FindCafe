@@ -86,8 +86,17 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             requireActivity().nav_view.menu.getItem(0).isChecked = true
         }
 
+        root.my_zoom_in.setOnClickListener{
+            if (map != null) map.moveCamera(CameraUpdateFactory.zoomIn())
+        }
+
+        root.my_zoom_out.setOnClickListener{
+            if (map != null) map.moveCamera(CameraUpdateFactory.zoomOut())
+        }
+
         root.my_location.setOnClickListener {
             if (map != null) {
+                //map.moveCamera(CameraUpdateFactory.zoomIn())
                 val bounds = LatLngBounds.builder()
                 for (i in places.indices) {
                     bounds.include(
@@ -194,7 +203,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                                         i.longitude
                                     )
                                     line.add(pt)
-
                                 }
                             }
                             map.addPolyline(line)
