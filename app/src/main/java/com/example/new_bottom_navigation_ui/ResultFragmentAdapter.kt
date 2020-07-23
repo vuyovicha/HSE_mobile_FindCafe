@@ -3,6 +3,7 @@ package com.example.new_bottom_navigation_ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +42,7 @@ class ResultFragmentAdapter(private val man : FragmentManager) : RecyclerView.Ad
         private val name = root.cafeName
         private val location = root.cafeAddress
         private val addedTime = root.timeAddedToRoute
+        private val routeButton = root.see_route_button
 
         fun onBindResult(restaurant : Restaurant) {
             Picasso.get().load(restaurant.smallPhotoUrl).into(image)
@@ -49,6 +51,22 @@ class ResultFragmentAdapter(private val man : FragmentManager) : RecyclerView.Ad
             var minutes = "minutes"
             if (restaurant.addedMinutes == "1") minutes = "minute"
             addedTime.text = "+${restaurant.addedMinutes} $minutes"
+
+            routeButton.setOnClickListener {
+                MainActivity.getRoute = true
+                val supportFragmentManager = man
+                val fragmentTag = MapFragment::class.java.simpleName
+
+                supportFragmentManager.commit {
+                    val thisFragment: Fragment? = supportFragmentManager.findFragmentByTag(fragmentTag)
+                    supportFragmentManager.fragments.forEach { hide(it) }
+                    if (thisFragment != null) {
+                        remove(thisFragment)
+                        val nextFragment = MapFragment()
+                        add(R.id.nav_host_fragment, nextFragment, nextFragment::class.java.simpleName) //todo
+                    }
+                }
+            }
 
             root.setOnClickListener {
                 MainActivity.restaurantGetInfo = restaurant

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -70,9 +71,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             val supportFragmentManager = requireActivity().supportFragmentManager
             val fragmentTag = FindFragment::class.java.simpleName
 
-            val thisFragment: Fragment? = supportFragmentManager.findFragmentByTag(fragmentTag)
-            if (thisFragment != null) supportFragmentManager.beginTransaction().remove(thisFragment).commit()
-
             supportFragmentManager.commit {
                 supportFragmentManager.fragments.forEach { hide(it) }
                 val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
@@ -105,7 +103,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
 
         root.my_location.setOnClickListener {
-            if (map != null) {
+            if (map != null && places.isNotEmpty()) {
                 val bounds = LatLngBounds.builder()
                 for (i in places.indices) {
                     bounds.include(
@@ -174,7 +172,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         )
 
         // GPS HERE
-//        val location = MainActivity.mgr?.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+        val myLocation = MainActivity.mgr?.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+        MainActivity.fromAddress = DisplayAddress("My location", PointString(myLocation?.latitude.toString(), myLocation?.longitude.toString()))
 //        if (location != null) {
 //            googleMap.addMarker(MarkerOptions()
 //                .position(

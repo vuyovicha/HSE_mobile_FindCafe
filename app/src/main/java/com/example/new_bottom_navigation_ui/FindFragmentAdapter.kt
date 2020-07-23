@@ -49,7 +49,7 @@ class FindFragmentAdapter(private val man : FragmentManager) : RecyclerView.Adap
             }
             PREFERENCE_LIST -> PreferenceListViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.find_fragment_preferences_view, parent, false), man)
+                    .inflate(R.layout.find_fragment_preferences_view_2, parent, false), man)
             PREFERENCE_PRICE -> PreferencePriceViewHolder(
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.find_fragment_prices, parent, false))

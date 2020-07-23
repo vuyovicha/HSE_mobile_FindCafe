@@ -1,6 +1,7 @@
 package com.example.new_bottom_navigation_ui
 
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
@@ -8,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.find_fragment_header.view.*
 import kotlinx.android.synthetic.main.find_fragment_open_now.view.*
 import kotlinx.android.synthetic.main.find_fragment_preferences_view.view.*
+import kotlinx.android.synthetic.main.find_fragment_preferences_view.view.change_preferences_button
+import kotlinx.android.synthetic.main.find_fragment_preferences_view.view.chosen_preferences
+import kotlinx.android.synthetic.main.find_fragment_preferences_view.view.preferences_header
+import kotlinx.android.synthetic.main.find_fragment_preferences_view_2.view.*
 import kotlinx.android.synthetic.main.find_fragment_prices.view.*
 import kotlinx.android.synthetic.main.find_fragment_rating.view.*
 import kotlinx.android.synthetic.main.find_fragment_route_view.view.*
@@ -53,7 +58,7 @@ class RouteViewHolder(private val root: View, private val manager : FragmentMana
 
 class PreferenceListViewHolder(private val root: View, private val manager : FragmentManager) : RecyclerView.ViewHolder(root) {
     private val header = root.preferences_header
-    private val changeButton = root.change_preferences_button
+    private val changeButton = root.settings_button
     private val chosenPreferences = root.chosen_preferences
 
     companion object {

@@ -10,6 +10,21 @@
     android:layout_marginHorizontal="5dp"
     android:layout_marginVertical="5dp">
 
+    <ImageButton
+        android:id="@+id/see_route_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_border"
+        android:tint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@id/cafeImageSmall"
+        app:layout_constraintEnd_toStartOf="@+id/timeAddedToRoute"
+        app:layout_constraintStart_toEndOf="@+id/cafeImageSmall"
+        app:layout_constraintTop_toBottomOf="@id/cafeAddress"
+        app:srcCompat="@drawable/ic_directions_black_24dp" />
+
 
     <ImageView
         android:id="@+id/cafeImageSmall"
@@ -53,13 +68,16 @@
         android:id="@+id/timeAddedToRoute"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
         android:text="+15 minutes added"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/cafeImageSmall"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cafeImageSmall"
+        app:layout_constraintStart_toEndOf="@+id/see_route_button"
         app:layout_constraintTop_toBottomOf="@id/cafeAddress" />
 
 
